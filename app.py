@@ -1,10 +1,18 @@
 from flask import Flask, jsonify, request
 import stripe
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env.local
+load_dotenv('.env.local')
 
 app = Flask(__name__)
 
-# Set your Stripe secret key here (replace with your actual Stripe secret key)
-stripe.api_key = 'sk_test_51Po2LG2MwOOp1GEXKimcGg9NMsMWnqsBlxSuWY1WbdcQ8qB6m24ectvUMN86vYn7mureqRUpc8UkHW29QIaSV5rn00ujWjiIuu'
+# Set your Stripe secret key from the environment variable
+stripe.api_key = os.getenv('STRIPE_API_KEY')
+
+if not stripe.api_key:
+    raise ValueError("No STRIPE_API_KEY set for Flask application")
 
 @app.route('/status', methods=['GET'])
 def status():
