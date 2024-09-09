@@ -1,6 +1,6 @@
 # Arcade STEM API
 
-This is a simple Flask API for creating Stripe Payment Intents, payment links, and handling Stripe webhooks. The API has several endpoints, including one for checking the status of the API, creating payment intents, creating payment links, and handling webhooks.
+This is a simple Flask API for creating Stripe Payment links, and handling Stripe webhooks. The API has several endpoints, including one for checking the status of the API, creating payment links, and handling webhooks.
 
 ## Endpoints
 

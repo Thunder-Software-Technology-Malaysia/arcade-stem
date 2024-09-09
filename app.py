@@ -11,6 +11,9 @@ app = Flask(__name__)
 # Set up the Stripe API key from environment variable
 stripe.api_key = os.getenv("STRIPE_API_KEY")
 
+if not stripe.api_key:
+    raise ValueError("No STRIPE_API_KEY set for Flask application")
+
 # Dictionary to track the status of machines
 machine_status = {}
 
