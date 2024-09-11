@@ -118,7 +118,88 @@ To install the Stripe CLI on Windows without using Scoop:
 
 > **Note:** Windows anti-virus scanners occasionally flag the Stripe CLI as unsafe. This is very likely a false positive. For more information, see [issue #692](https://github.com/stripe/stripe-cli/issues/692) in the GitHub repository.
 
+## Packaging the Application for AWS Lambda
+1. To deploy the application to AWS Lambda, follow these steps:
+
+2. Install dependencies into the package folder:
+
+3. pip install -r requirements.txt -t ./package
+
+**Create the Lambda package:**
+
+1. cd package
+2. Compress-Archive -Path .\* -DestinationPath ..\lambda_function.zip
+3. cd ..
+**Add your application code (e.g., app.py) to the package:**
+
+1. Compress-Archive -Path .\app.py -Update -DestinationPath .\lambda_function.zip
+
+Now, the lambda_function.zip file contains your code and all the necessary dependencies.
+
+## Deploy to AWS Lambda
+1. Log in to the AWS Management Console and navigate to the Lambda service.
+
+2. Create a new Lambda function:
+
+3. Select "Author from scratch."
+
+4. Choose Python 3.12 as the runtime.
+
+5. Upload the lambda_function.zip file as the Lambda code package.
+
+## Note: Setup Environment Variable that tally with .env 
+  5.1 Make sure the handler is handler properly (eg. app.lambda_handler) 
+
+6. Set up an API Gateway to trigger the Lambda function:
+
+7. In the Lambda function settings, click on "Add trigger."
+
+8. Select "API Gateway."
+
+9. Configure a new API or use an existing one.
+
+## Setup Stripe Webhook with API Gateway
+1. Create the API Gateway:
+
+2. Navigate to API Gateway in the AWS console.
+
+3. Create a new Rest API.
+
+4. Add a route for /webhook.
+
+5. Set the method to POST.
+
+6. Link the API Gateway to the Lambda Function:
+
+7. In your API Gateway, select the created route.
+
+### Setting up Stripe Webhook on Stripe Dashboard with API Gateway
+
+To configure a Stripe webhook via the Stripe Dashboard and connect it to your API Gateway, follow these steps:
+
+1. **Navigate to the Webhooks section** in your [Stripe Dashboard](https://dashboard.stripe.com/webhooks).
+
+2. **Click "Add endpoint."**
+
+3. **Select the events you want to monitor**. For this project, select the `checkout.session.completed` event.
+    - You can search for the event and select it in the event filter section.
+
+4. **Add your API Gateway URL** as the endpoint. The URL should be in the format:
+https://{api_gateway_id}.execute-api.{region}.amazonaws.com/webhook
+
+
+Replace:
+- `{api_gateway_id}` with your actual API Gateway ID.
+- `{region}` with the AWS region your API Gateway is hosted in.
+
+Example:
+https://abc123.execute-api.us-east-1.amazonaws.com/webhook
+
+
+5. **Click "Create endpoint"** to finalize the webhook setup.
+
 ## Notes
 
 - Make sure not to expose your Stripe API key and webhook secret publicly.
-- This API is intended for educational purposes and should not be used in production without proper security measures.
+- This API is intended fPackaging and Deployment on AWS Lambda
+or educational purposes and should not be used in production without proper security measures.
