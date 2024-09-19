@@ -1,20 +1,18 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+# Use the official AWS Lambda Python 3.9 base image
+FROM public.ecr.aws/lambda/python:3.9
 
-# Set the working directory
-WORKDIR /usr/src/app
+# Set the working directory to /var/task (optional, as it's the default)
+WORKDIR /var/task
 
-# Copy the current directory contents into the container at /usr/src/app
-COPY . .
+# Copy only the requirements.txt first to leverage Docker layer caching
+COPY requirements.txt ./
 
-# Install any needed packages specified in requirements.txt
+# Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 5000 available to the world outside this container
-EXPOSE 5000
+# Copy the rest of the application code
+COPY . .
 
-# Define environment variable to disable buffering for better log visibility
-ENV PYTHONUNBUFFERED=1
+# Specify the command to run your Lambda function handler
+CMD ["app.lambda_handler"]
 
-# Run the app
-CMD ["python", "app.py"]
