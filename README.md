@@ -5,6 +5,14 @@ This repository contains a simple Flask API integrated with Stripe for handling 
 ## Endpoints
 
 ### Status Endpoint
+- URL: /status
+- Method: GET
+- Description: Retrieve the current status of the API to ensure it's running properly.
+- Response:
+  ```json
+    "status": "up",
+    "message": "API is running"
+  ```
 
 ### Create Payment Link Endpoint
 
