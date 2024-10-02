@@ -13,6 +13,9 @@ load_dotenv()
 app = Flask(__name__)
 stripe.api_key = os.getenv("STRIPE_API_KEY")
 
+if not stripe.api_key:
+    raise ValueError("No STRIPE_API_KEY set for Flask application")
+
 # MQTT settings
 MQTT_BROKER = 'test.mosquitto.org'  # Use your broker here if running a local Mosquitto instance
 MQTT_PORT = 1883
