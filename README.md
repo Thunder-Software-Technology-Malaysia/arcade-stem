@@ -113,26 +113,6 @@ This repository contains a simple Flask API integrated with Stripe for handling 
     python app.py
     ```
 
-## Docker Setup
-
-1. Create a .env file in the root directory and add your keys:
-
-```plaintext
-STRIPE_API_KEY=your_stripe_api_key
-STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
-```
-
-2. Run Docker container locally:
-
-3. Build and run the container using Docker:
-
-```shell
-docker build --no-cache -t arcade-game-app .
-docker run --rm -d -p 5000:5000 --env-file .env --name arcade-stem-app arcade-game-app
-```
-
-4. Access the API locally at http://localhost:5000.
-
 ### Docker Setup for AWS Lambda Deployment
 
 ### Prerequisites
