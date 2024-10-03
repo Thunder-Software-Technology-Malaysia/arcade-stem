@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import awsgi
 import datetime
 import json
+import ssl
 
 # Load environment variables
 load_dotenv()
@@ -17,14 +18,34 @@ if not stripe.api_key:
     raise ValueError("No STRIPE_API_KEY set for Flask application")
 
 # MQTT settings
-MQTT_BROKER = 'test.mosquitto.org'  # Use your broker here if running a local Mosquitto instance
-MQTT_PORT = 1883
+MQTT_BROKER = 'ec2-52-221-239-243.ap-southeast-1.compute.amazonaws.com'  # Your EC2 instance
+MQTT_PORT = 8883  # SSL/TLS port
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CA_CERT_PATH = os.path.join(BASE_DIR, 'ca.crt') 
 
 # Initialize MQTT client
 client = mqtt.Client()
 
+# Configure TLS
+client.tls_set(
+    ca_certs=CA_CERT_PATH,
+    certfile=None,
+    keyfile=None,
+    cert_reqs=ssl.CERT_REQUIRED,
+    tls_version=ssl.PROTOCOL_TLSv1_2,
+    ciphers=None
+)
+
 # Connect to the MQTT broker
-client.connect(MQTT_BROKER, MQTT_PORT)
+try:
+    client.connect(MQTT_BROKER, MQTT_PORT)
+    print(f"Connected to MQTT broker at {MQTT_BROKER}:{MQTT_PORT} with SSL.")
+except Exception as e:
+    print(f"Failed to connect to MQTT broker: {e}")
+    exit(1)
+
+# Start the MQTT loop in a separate thread
+client.loop_start()
 
 # Dictionary to track machine statuses
 machine_status = {}
@@ -100,8 +121,10 @@ def stripe_webhook():
                 "credits": amount_paid // 100,  # Assuming each credit is worth 100 cents
                 "timestamp": get_timestamp()
             }
+            coin_pulse_message = json.dumps(coin_pulse_signal)
             print(f"Publishing Coin Pulse Signal: {coin_pulse_signal}")
-            client.publish(f"arcade/machine/{machine_id}/coinpulse", str(coin_pulse_signal))
+            result= client.publish(f"arcade/machine/{machine_id}/coinpulse", coin_pulse_message)
+            print(f"MQTT publish result: {result.rc}")  # Log the result code
 
     return '', 200
 
@@ -134,8 +157,9 @@ def game_over():
     except Exception as e:
         print(f"Error in game over process: {str(e)}")
         return jsonify({'error': str(e)}), 500
+    
 def lambda_handler(event, context):
-    print(f"Lambda function invoked with event: {event}")
+    # print(f"Lambda function invoked with event: {event}")
     return awsgi.response(app, event, context)
 
 if __name__ == '__main__':

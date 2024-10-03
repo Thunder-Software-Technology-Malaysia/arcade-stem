@@ -2,7 +2,7 @@
 FROM public.ecr.aws/lambda/python:3.9
 
 # Copy the rest of the application code
-COPY app.py ${LAMBDA_TASK_ROOT}
+COPY app.py ca.crt ${LAMBDA_TASK_ROOT}
 
 # Copy only the requirements.txt first to leverage Docker layer caching
 COPY requirements.txt ./
