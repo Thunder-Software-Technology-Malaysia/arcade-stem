@@ -109,11 +109,27 @@ This document provides step-by-step instructions on how to set up Mosquitto MQTT
   ```
 
 ### Step 7: Test the MQTT Broker with SSL
-1. From your local machine or another server, test using the Mosquitto client:
+1. Copy the Certificate to Your Local Machine:
+
+    Use scp to copy the ca.crt file from the EC2 instance to your local machine. This step is necessary so your local machine can use the CA certificate to verify the server.
+
+    ```shell
+    scp -i "your-key.pem" ubuntu@<your-ec2-public-ip>:/etc/mosquitto/certs/ca.crt .
+    ```
+
+    Run the following command from your local machine, replacing the placeholders with your details:
+    This command will download the ca.crt file to your current local directory.
+
+2. Run this command in ur local machine to subscribe to the topic along with the cafile 
+   mosquitto_sub -h <your-ec2-public-ip> -p 8883 -t test/topic --cafile /path/crt
+
+
+3. From your server, test using the Mosquitto client:
    ```shell
-   mosquitto_pub -h <your-ec2-public-ip> -p 8883 --cafile /path/to/ca.crt -t "test/topic" -m "Hello MQTT"
+   mosquitto_pub -h <your-ec2-public-ip> -p 8883 -t test/topic -m "Hello MQTT over SSL" --cafile ./ca.crt
    ```
-2. You should be able to publish a message to the broker over SSL.
+
+4. You should be able to publish a message to the broker over SSL.
 
 
 ### Troubleshooting with permission
