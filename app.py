@@ -18,28 +18,45 @@ if not stripe.api_key:
     raise ValueError("No STRIPE_API_KEY set for Flask application")
 
 # MQTT settings
-MQTT_BROKER = 'ec2-52-221-239-243.ap-southeast-1.compute.amazonaws.com'  # Your EC2 instance
+MQTT_BROKER = 'g38a1ef7.ala.asia-southeast1.emqxsl.com'  # EMQX Cloud broker address
 MQTT_PORT = 8883  # SSL/TLS port
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-CA_CERT_PATH = os.path.join(BASE_DIR, 'ca.crt') 
+CA_CERT_PATH = os.path.join(BASE_DIR, 'ca.crt')
 
-# Initialize MQTT client
+# Initialize Paho MQTT Client
 client = mqtt.Client()
 
-# Configure TLS
+# Add username and password for MQTT authentication
+client.username_pw_set(username=os.getenv("MQTT_USERNAME"), password=os.getenv("MQTT_PASSWORD"))
+
+# Callback function to check if connected successfully
+def on_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print("Connected to MQTT Broker!")
+    else:
+        print(f"Failed to connect to MQTT Broker. Return code: {rc}")
+
+# Callback function for when connection is lost
+def on_disconnect(client, userdata, rc):
+    print("Disconnected from MQTT Broker")
+
+# Configure TLS for encrypted connection
 client.tls_set(
     ca_certs=CA_CERT_PATH,
     certfile=None,
     keyfile=None,
     cert_reqs=ssl.CERT_REQUIRED,
-    tls_version=ssl.PROTOCOL_TLSv1_2,
-    ciphers=None
+    tls_version=ssl.PROTOCOL_TLSv1_2
 )
+
+# Set connection callbacks
+client.on_connect = on_connect
+client.on_disconnect = on_disconnect
 
 # Connect to the MQTT broker
 try:
     client.connect(MQTT_BROKER, MQTT_PORT)
-    print(f"Connected to MQTT broker at {MQTT_BROKER}:{MQTT_PORT} with SSL.")
+    print(f"Attempting to connect to MQTT broker at {MQTT_BROKER}:{MQTT_PORT} with SSL.")
 except Exception as e:
     print(f"Failed to connect to MQTT broker: {e}")
     exit(1)
@@ -67,22 +84,26 @@ def create_payment_link():
     try:
         data = request.json
         machine_id = data.get('machine_id')
-        print(f"Received request to create payment link for machine ID: {machine_id}")
 
+        # Create a payment link via Stripe API
         payment_link = stripe.PaymentLink.create(
             line_items=[{
                 'price': 'price_1PuQrZ2MwOOp1GEXTkNAef1b',  # Replace with your actual Stripe price ID
                 'quantity': 1,
             }],
-            metadata={'machine_id': machine_id}
+            metadata={'machine_id': machine_id}  # Store machine_id in metadata
         )
-        print(f"Payment link created: {payment_link.url}")
-        return jsonify({'url': payment_link.url})
+
+        # Manually append the client_reference_id to the generated payment link
+        payment_url_with_id = f"{payment_link.url}?client_reference_id={machine_id}"
+
+        # Return the payment link with the client_reference_id attached
+        return jsonify({'url': payment_url_with_id})
+
     except Exception as e:
-        print(f"Error in creating payment link: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/addCredit', methods=['POST'])
 def stripe_webhook():
     payload = request.get_data(as_text=True)
     sig_header = request.headers.get('Stripe-Signature')
@@ -123,7 +144,7 @@ def stripe_webhook():
             }
             coin_pulse_message = json.dumps(coin_pulse_signal)
             print(f"Publishing Coin Pulse Signal: {coin_pulse_signal}")
-            result= client.publish(f"arcade/machine/{machine_id}/coinpulse", coin_pulse_message)
+            result = client.publish(f"arcade/machine/{machine_id}/coinpulse", coin_pulse_message)
             print(f"MQTT publish result: {result.rc}")  # Log the result code
 
     return '', 200
@@ -144,7 +165,7 @@ def game_over():
             }
             game_over_message = json.dumps(game_over_signal)  # Convert signal to JSON
             print(f"Publishing Game Over Signal: {game_over_message}")
-            
+
             # Publish the message and check the result
             result = client.publish(f"arcade/machine/{machine_id}/gameover", game_over_message)
             print(f"MQTT publish result: {result.rc}")  # Log the result code
@@ -157,9 +178,9 @@ def game_over():
     except Exception as e:
         print(f"Error in game over process: {str(e)}")
         return jsonify({'error': str(e)}), 500
-    
+
 def lambda_handler(event, context):
-    # print(f"Lambda function invoked with event: {event}")
+    # AWS Lambda handler
     return awsgi.response(app, event, context)
 
 if __name__ == '__main__':
