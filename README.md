@@ -177,12 +177,14 @@ Replace `your-account-id` and `your-region` with the actual AWS account ID and r
     In the AWS Lambda console, navigate to the configuration section and add the following environment variables:
     - STRIPE_API_KEY
     - STRIPE_WEBHOOK_SECRET (this will be filled in after setup the stripe webhook)
+    - MQTT_USERNAME
+    - MQTT_PASSWORD
 
 3. Link to API Gateway:
 
     -If you haven't already, set up an API Gateway to invoke your Lambda function.
     
-    -Make sure to enable "Lambda Proxy Integration" when setting up the API Gateway routes for /create-payment-link, /webhook, and /gameover. 
+    -Make sure to enable "Lambda Proxy Integration" when setting up the API Gateway routes for /create-payment-link, /addCredit, and /gameover. 
     
     -This allows the API Gateway to forward all requests and responses between the Lambda function and the client.
 

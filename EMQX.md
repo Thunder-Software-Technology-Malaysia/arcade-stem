@@ -2,7 +2,7 @@ EMQX Serverless Deployment Setup Guide
 
 1. Introduction
 
-Welcome to the setup tutorial for deploying EMQX in a serverless environment. EMQX is a popular open-source MQTT messaging broker known for its scalability, high performance, and compatibility with IoT systems. This guide will help you quickly set up and configure EMQX in a serverless environment, allowing you to benefit from its reliability without managing underlying infrastructure.
+Welcome to the setup tutorial for deploying EMQX in a serverless environment. EMQX is a popular open-source MQTT messaging broker known for its scalability, high performance, and compatibility with IoT systems. This guide will help you quickly set up and configure EMQX in a serverless environment, allowing you to benefit from its reliability without managing underlying infrastructure. Explore [more](https://www.emqx.com/en)
 
 Using EMQX in a serverless setup simplifies deployment and management, ensuring that the infrastructure scales automatically based on workload, reducing operational overhead, and optimizing costs.
 
@@ -10,7 +10,7 @@ Using EMQX in a serverless setup simplifies deployment and management, ensuring 
 
 Before getting started, ensure you have the following:
 
-EMQX Cloud Account: You need an account to access the EMQX Cloud Console. Sign up here.
+EMQX Cloud Account: You need an account to access the EMQX Cloud Console. Sign up [Here](https://accounts.emqx.com/signin).
 
 Network Permissions: Ensure that you have access to the internet and that no firewall rules block outbound communication on ports 1883 (MQTT), 8083 (WebSocket), or other relevant ports.
 
@@ -104,5 +104,5 @@ For more troubleshooting tips, see the EMQX Troubleshooting Guide.
 7. Extra Information
 - ![alt text]({08BFBA69-C4B7-4C37-86C1-568751B60AD6}.png)
 
-- https://www.emqx.com/en/blog/using-mqtt-in-unity-with-m2mqttunity-library-a-step-by-step-guide
-  This is the guide for setup mqtt with unity
+- This is the [guide](https://www.emqx.com/en/blog/using-mqtt-in-unity-with-m2mqttunity-library-a-step-by-step-guide) for setup mqtt with unity
+  
