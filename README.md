@@ -1,302 +1,389 @@
-# Arcade STEM API
+# Arcade STEM API with EMQX Serverless MQTT Integration
 
-This repository contains a simple Flask API integrated with Stripe for handling payments and webhooks, and MQTT for managing arcade machine states. The API is containerized using Docker and deployed to AWS Lambda using an Amazon ECR (Elastic Container Registry) image.
+This repository contains a robust solution for managing arcade machine states and handling payments using a Flask API integrated with Stripe and EMQX for MQTT messaging. The API is containerized using Docker and deployed to AWS Lambda using an Amazon ECR (Elastic Container Registry) image. The MQTT broker is deployed in a serverless environment using EMQX, ensuring scalability and high performance without the need to manage underlying infrastructure.
 
-## Endpoints
+## Table of Contents
 
-### Status Endpoint
-- URL: /status
-- Method: GET
-- Description: Retrieve the current status of the API to ensure it's running properly.
-- Response:
+1. [Introduction](#1-introduction)
+2. [Prerequisites](#2-prerequisites)
+3. [Local Setup](#3-local-setup)
+4. [EMQX Serverless Deployment](#4-emqx-serverless-deployment)
+5. [Docker Setup for AWS Lambda Deployment](#5-docker-setup-for-aws-lambda-deployment)
+6. [API Endpoints](#6-api-endpoints)
+7. [MQTT Integration](#7-mqtt-integration)
+8. [Testing](#8-testing)
+9. [Stripe CLI Setup](#9-stripe-cli-setup)
+10. [Troubleshooting](#10-troubleshooting)
+11. [Notes](#11-notes)
+
+## 1. Introduction
+
+Welcome to the **Arcade STEM API** documentation integrated with **EMQX Serverless Deployment**. This guide provides a comprehensive setup for managing arcade machine states via MQTT and handling payments through Stripe. By leveraging serverless technologies, this setup ensures scalability, high performance, and reduced operational overhead.
+
+- **Arcade STEM API:** A Flask-based API handling payments and arcade machine states.
+- **Stripe Integration:** For managing payments and handling webhooks.
+- **EMQX Serverless MQTT Broker:** For scalable and reliable MQTT messaging.
+- **AWS Lambda & ECR:** For deploying the containerized API in a serverless environment.
+
+## 2. Prerequisites
+
+### 2.1 General Prerequisites
+
+- **Docker Desktop:** Installed and running on your machine.
+- **AWS CLI (Version 2):** Installed and configured to interact with your AWS account.
+  ```shell
+  aws configure
+  ```
+  You will be prompted to enter:
+  - AWS Access Key ID
+  - AWS Secret Access Key
+  - Default region name (e.g., `ap-southeast-1`)
+  - Default output format (e.g., `json`)
+- **Python 3.6 or Higher**
+- **VSCode (Recommended):** For an enhanced development experience.
+
+### 2.2 EMQX Serverless Deployment Prerequisites
+
+- **EMQX Cloud Account:** Sign up [Here](https://accounts.emqx.com/signin).
+- **Network Permissions:** Ensure access to the internet and that no firewall rules block outbound communication on ports `1883` (MQTT), `8083` (WebSocket), `8883` (Secure MQTT), or other relevant ports.
+
+## 3. Local Setup
+
+### 3.1 Clone Repository
+
+```shell
+git clone https://github.com/Thunder-Software-Technology-Malaysia/arcade-stem.git
+cd arcade-stem
+```
+
+### 3.2 Setup Virtual Environment in VSCode
+
+1. Open the Project in VSCode:
+   - Launch VSCode.
+   - Click on File > Open Folder... and select the cloned arcade-stem repository.
+
+2. Create a Virtual Environment:
+   - Open the integrated terminal in VSCode (View > Terminal).
+   - Run the following command:
+     ```shell
+     python3 -m venv venv
+     ```
+   Note: On Windows, you might use `python` instead of `python3`.
+
+3. Activate the Virtual Environment:
+   - macOS / Linux:
+     ```shell
+     source venv/bin/activate
+     ```
+   - Windows (PowerShell):
+     ```powershell
+     .\venv\Scripts\Activate
+     ```
+   - Windows (Command Prompt):
+     ```cmd
+     venv\Scripts\activate.bat
+     ```
+
+4. Verify Activation:
+   - The terminal prompt should now be prefixed with `(venv)`.
+
+### 3.3 Install Dependencies
+
+```shell
+pip install -r requirements.txt
+```
+
+### 3.4 Configure Environment Variables
+
+1. Create a `.env.local` file in the project root directory with the following variables:
+
+```plaintext
+STRIPE_API_KEY=your_stripe_api_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+STRIPE_PRICE_ID=your_stripe_price_id
+MQTT_USERNAME=your_mqtt_username
+MQTT_PASSWORD=your_mqtt_password
+EMQX_BROKER_URL=your-emqx-broker-url
+EMQX_PORT=8883
+```
+
+2. **Variable Descriptions:**
+   - `STRIPE_API_KEY`: Your Stripe Secret API Key
+   - `STRIPE_WEBHOOK_SECRET`: Your Stripe Webhook Secret
+   - `STRIPE_PRICE_ID`: The Stripe Price ID for the product/service
+   - `MQTT_USERNAME`: Username for MQTT broker authentication
+   - `MQTT_PASSWORD`: Password for MQTT broker authentication
+   - `EMQX_BROKER_URL`: URL of your EMQX broker
+   - `EMQX_PORT`: Port for MQTT broker
+
+3. **Obtaining API Keys:**
+   - Stripe API Key:
+     - Sign in to your Stripe Dashboard
+     - Navigate to Developers > API keys
+     - Use the Secret key (starts with sk_test_ for testing)
+   - Stripe Webhook Secret:
+     - Obtained after setting up a webhook endpoint in Stripe
+   - EMQX Credentials:
+     - Sign up and deploy your MQTT broker using the EMQX Serverless Deployment Guide
+     - Use the provided username and password
+
+### 3.5 Run the Application
+
+1. Start the Flask Application:
+   ```shell
+   python app.py
+   ```
+
+2. Test the status endpoint:
+   ```shell
+   curl http://localhost:5000/status
+   ```
+
+   Expected response:
+   ```json
+   {
+     "status": "up",
+     "message": "API is running"
+   }
+   ```
+
+## 4. EMQX Serverless Deployment
+
+### 4.1 Introduction
+
+EMQX is a highly scalable, open-source MQTT messaging broker designed for IoT systems. Deploying EMQX in a serverless environment using EMQX Cloud ensures automatic scaling, high availability, and reduced operational management.
+
+### 4.2 Setup Instructions
+
+1. **Navigate to the EMQX Cloud Console**
+2. **Log in or Create an Account**
+3. **Create a New Deployment:**
+   - Click on "Create Deployment"
+   - Select "Serverless Deployment"
+   - Choose a Cloud Provider and Region
+4. **Configure Deployment Options:**
+   - Set Deployment Name
+5. **Launch the Deployment**
+6. **SSL/TLS Configuration:**
+   - Download CA Certificate
+   - Configure secure connections
+
+### 4.3 Testing the Deployment
+
+**Publishing Example:**
+
+# Publish coinpulse
+```bash
+mosquitto_pub -h your-emqx-broker-url -p 8883 \
+  -t "arcade/machine/123/coinpulse" \
+  -m '{"machineId": "machine_123", "credits": 1, "timestamp": "2024-10-15T00:42:34.019303Z"}' \
+  --cafile "path/to/ca.crt" \
+  -u "your-username" -P "your-password"
+```
+
+# Publish gameover
+```bash
+mosquitto_pub -h your-emqx-broker-url -p 8883 \
+  -t "arcade/machine/123/gameover" \
+  -m '{"machineId": "machine_123", "status": "game_over", "timestamp": "2024-10-15T02:42:34.019303Z"}' \
+  --cafile "path/to/ca.crt" \
+  -u "your-username" -P "your-password"
+```
+
+**Subscribing Example:**
+```bash
+mosquitto_sub -h your-emqx-broker-url -p 8883 \
+  -t "arcade/machine/+/coinpulse" \
+  -t "arcade/machine/+/gameover" \
+  --cafile "path/to/ca.crt" \
+  -u "your-username" -P "your-password"
+```
+
+### 4.4 Troubleshooting
+
+- **Deployment Failed:**
+  - Verify cloud provider region availability
+- **Client Connection Issues:**
+  - Check broker URL, port, and credentials
+- **Firewall Restrictions:**
+  - Verify required ports are open
+
+## 5. Docker Setup for AWS Lambda Deployment
+
+### 5.1 Prerequisites
+
+- Amazon Elastic Container Registry (ECR)
+- Docker Desktop
+- AWS CLI (Version 2)
+
+### 5.2 Finding Your Amazon ECR Repository
+
+1. Log in to AWS Management Console
+2. Navigate to ECR service
+3. Create or use existing repository
+4. Copy Repository URI
+
+### 5.3 Deploy to AWS Lambda
+
+1. **Build Docker Image:**
+   ```shell
+   docker build --no-cache -t arcade-game-app .
+   ```
+
+2. **Tag Docker Image:**
+   ```shell
+   docker tag arcade-game-app:latest your-account-id.dkr.ecr.your-region.amazonaws.com/arcade-game:latest
+   ```
+
+3. **Authenticate Docker to AWS ECR:**
+   ```shell
+   aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
+   ```
+
+4. **Push Image to AWS ECR:**
+   ```shell
+   docker push your-account-id.dkr.ecr.your-region.amazonaws.com/arcade-game:latest
+   ```
+
+5. **Deploy to Lambda:**
+   - Create Lambda function
+   - Select container image
+   - Configure environment variables
+   - Set up API Gateway integration
+
+### 5.4 Docker Build Architecture Issue on M3 MacBook Pro
+
+**Problem:** Deployment fails with exec format error on M3 MacBooks.
+
+**Solution:**
+```shell
+docker buildx build --platform linux/amd64 --no-cache -t arcade-game-app .
+```
+
+## 6. API Endpoints
+
+### 6.1 Status Endpoint
+
+- **URL:** `/status`
+- **Method:** GET
+- **Response:**
   ```json
+  {
     "status": "up",
     "message": "API is running"
+  }
   ```
 
-### Create Payment Link Endpoint
+### 6.2 Create Payment Link Endpoint
 
-- URL: /create-payment-link
-- Method: POST
-- Description: Create a Stripe Payment Link with optional machine metadata.
-- Request Body:
+- **URL:** `/create-payment-link`
+- **Method:** POST
+- **Request Body:**
   ```json
-    "machine_id": "unique_machine_id"  // Optional machine ID to track the payment
-  ```
-- Response:
-  ```json
-    "url": "https://payment-link.url"  // URL to the payment link
-  ```
-
-- Testing with curl:
-  - You can test the /create-payment-link endpoint using the following curl command:
-    ```shell
-    curl -X POST http://localhost:5000/create-payment-link -H "Content-Type:application/json" -d "{\"machine_id\":\"machine_123\"}"
-    ```
-### Stripe Webhook Endpoint
-
-- URL: /webhook
-- Method: POST
-- Description: Stripe webhook to handle events such as payment completions.
-- Request Body: Stripe sends the event payload automatically.
-- Response:
-```plaintext
-  200 OK on success, 400 for validation errors
-  ```
-
-- Event Handling: The webhook listens for the checkout.session.completed event, verifies the event signature, and updates the status of the machine if machine_id is provided in the metadata.
-
-- Testing Webhooks with Stripe CLI:
-  - You can forward Stripe events to your local webhook using the following Stripe CLI command:
-  ```shell
-    stripe listen --forward-to localhost:5000/webhook
-    ```
-
-### Game Over Endpoint
-
-- URL: /gameover
-- Method: POST
-- Description: Sends a game over signal to an arcade machine.
-- Request Body:
-  ```json
+  {
     "machine_id": "unique_machine_id"
+  }
   ```
-- Response:
+- **Response:**
   ```json
-  "message": "Game over signal sent"
-    ```
+  {
+    "url": "https://payment-link.url"
+  }
+  ```
 
-## Local Setup
+### 6.3 Stripe Webhook Endpoint
 
-### Prerequisites
+- **URL:** `/webhook`
+- **Method:** POST
+- **Description:** Handles Stripe events
+- **Response:** 200 OK or 400 Error
 
-- Docker Desktop: Ensure Docker Desktop is installed and running on your machine.
-- AWS CLI: Install the AWS CLI (version 2) and configure it to interact with your AWS account.
-- AWS CLI Setup:
-    aws configure
-    You will be prompted to enter:
-    - AWS Access Key ID
-    - AWS Secret Access Key
-    - Default region name (e.g., ap-southeast-1)
-    - Default output format (e.g., json)
+### 6.4 Game Over Endpoint
 
-### Requirements
+- **URL:** `/gameover`
+- **Method:** POST
+- **Request Body:**
+  ```json
+  {
+    "machine_id": "unique_machine_id"
+  }
+  ```
+- **Response:**
+  ```json
+  {
+    "message": "Game over signal sent"
+  }
+  ```
 
-- Python 3.6 or higher
-- Flask
-- Stripe
-- python-dotenv
-- aws-wsgi
-- paho-mqtt
+## 7. MQTT Integration
 
-### Local Setup
+### 7.1 MQTT Topics
 
-1. Clone the repository:
-    ```shell
-    git clone https://github.com/Thunder-Software-Technology-Malaysia/arcade-stem.git
-    cd arcade-stem
-    ```
+- `arcade/machine/<machine_id>/coinpulse`
+- `arcade/machine/<machine_id>/gameover`
 
-2. Install dependencies:
-    ```shell
-    pip install -r requirements.txt
-    ```
+### 7.2 Publishing and Subscribing
 
-3. Create a .env.local file and add your Stripe API key and Webhook secret:
-    ```plaintext
-    STRIPE_API_KEY=your_stripe_api_key
-    STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
-    ```
+Examples provided in [Testing the Deployment](#43-testing-the-deployment) section.
 
-4. Run the application:
-    ```shell
-    python app.py
-    ```
+## 8. Testing
 
-### Docker Setup for AWS Lambda Deployment
+### 8.1 Testing with curl
 
-### Prerequisites
-
-- Amazon Elastic Container Registry (ECR): AWS service to store your Docker images.
-- Docker Desktop: Ensure it is installed and running.
-
-### Finding Your Amazon ECR Repository
-
-1. Log in to the AWS Management Console and navigate to the ECR service:
-
-2. In the AWS Console, search for ECR (Elastic Container Registry).
-
-3. You can create a new repository or use an existing one. For this project, ensure you have an ECR repository (e.g., arcade-game).
-
-4. Copy the repository URI for use in the deployment steps (example: your-account-id.dkr.ecr.your-region.amazonaws.com/arcade-game).
-
-
-## Deploy to AWS Lambda
-
-### Step-by-Step AWS Lambda Docker Deployment
-
-1. Build Docker image:
-
-    ```shell
-    docker build --no-cache -t arcade-game-app .
-    ```
-
-2. Tag the Docker image:
-
-    -Tag your image with the AWS ECR repository URI:
-
-    ```shell
-    docker tag arcade-game-app:latest your-account-id.dkr.ecr.your-region.amazonaws.com/arcade-game:latest
-    ```
-
-3. Authenticate Docker to your AWS ECR:
-
-    -Use the AWS CLI to log in to your ECR repository:
-
-    ```shell
-    aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
-    ```
-
-4. Push the image to AWS ECR:
-
-    ```shell
-    docker push your-account-id.dkr.ecr.your-region.amazonaws.com/arcade-game:latest
-    ```
-Replace `your-account-id` and `your-region` with the actual AWS account ID and region where your ECR repository is located.
-
-### Deploying Docker Image to AWS Lambda
-
-1. Create an AWS Lambda function:
-
-    Go to the AWS Lambda Console.
-    Choose "Create Function" and select "Container image" as the source.
-    Select the container image you uploaded to Amazon ECR (arcade-game:latest).
-
-2. Set up environment variables in Lambda:
-
-    In the AWS Lambda console, navigate to the configuration section and add the following environment variables:
-    - STRIPE_API_KEY
-    - STRIPE_WEBHOOK_SECRET (this will be filled in after setup the stripe webhook)
-    - MQTT_USERNAME
-    - MQTT_PASSWORD
-
-3. Link to API Gateway:
-
-    -If you haven't already, set up an API Gateway to invoke your Lambda function.
-    
-    -Make sure to enable "Lambda Proxy Integration" when setting up the API Gateway routes for /create-payment-link, /addCredit, and /gameover. 
-    
-    -This allows the API Gateway to forward all requests and responses between the Lambda function and the client.
-
-### Setting up API Gateway with Proxy Integration
-
-1. Create or open your API Gateway in the AWS Console.
-
-2. Create a new route for the API, such as /create-payment-link and /webhook.
-
-3. When adding the Lambda integration, ensure the Lambda Proxy Integration option is checked.
-
-4. Deploy the API to make the routes live.
-
-## MQTT Setup
-
-### MQTT Integration in the API
-
-The API uses MQTT to communicate with arcade machines after successful payments and game-over events. The MQTT broker used for testing is a public broker (test.mosquitto.org). The following MQTT topics are used:
-
-- arcade/machine/<machine_id>/coinpulse: Sent when a payment is completed.
-- arcade/machine/<machine_id>/gameover: Sent when the game over signal is triggered.
-
-### Setting Up MQTT for Testing
-
-#### Using mosquitto_sub to Subscribe to MQTT Topics
-
-1. Install Mosquitto MQTT Client:
-
-For Ubuntu:
-
+**Create Payment Link:**
 ```bash
-sudo apt-get install mosquitto-clients
+curl -X POST https://your-api-id.execute-api.your-region.amazonaws.com/prod/create-payment-link \
+-H "Content-Type: application/json" \
+-d "{\"machine_id\":\"machine_123\"}"
 ```
 
-For macOS (using Homebrew):
-
+**Game Over Signal:**
 ```bash
-    brew install mosquitto
+curl -X POST https://your-api-id.execute-api.your-region.amazonaws.com/prod/gameover \
+-H "Content-Type: application/json" \
+-d "{\"machine_id\":\"machine_123\"}"
 ```
 
-For Windows: Download the Mosquitto client and install it.
+### 8.2 Setting up Stripe Webhook
 
-2. Subscribe to the MQTT topics:
+1. Navigate to Stripe Dashboard Webhooks section
+2. Add endpoint
+3. Select events to monitor
+4. Configure API Gateway URL
+5. Create endpoint
 
-    Open a terminal and run the following command to subscribe to the relevant topics:
-    ```bash
-    mosquitto_sub -h test.mosquitto.org -p 1883 -t "arcade/machine/+/coinpulse" -t "arcade/machine/+/gameover"
-    ```
+## 9. Stripe CLI Setup
 
-This command subscribes to all coin pulse and game over topics from different machines using wildcards (+).
+### Installing Stripe CLI
 
-3. Publish messages (for testing purposes):
+**macOS:**
+```shell
+brew install stripe/stripe-cli/stripe
+```
 
-    To simulate MQTT messages manually, you can use mosquitto_pub to publish to the topics:
+**Windows:**
+1. Download latest release from GitHub
+2. Extract to desired location
+3. Add to environment PATH
 
-    ```bash
-    mosquitto_pub -h test.mosquitto.org -p 1883 -t "arcade/machine/machine_123/coinpulse" -m '{"machineId": "machine_123", "credits": 10, "timestamp": "2024-01-01T00:00:00Z"}'
-    ```
+### Using Stripe CLI
 
-## Testing
+**Forward Events:**
+```shell
+stripe listen --forward-to localhost:5000/webhook
+```
 
-### Testing with curl
+## 10. Troubleshooting
 
-- Create Payment Link: You can trigger the /create-payment-link API to generate a payment link using the following curl command:
-
-    ```bash
-    curl -X POST https://your-api-id.execute-api.your-region.amazonaws.com/prod/create-payment-link \ -H "Content-Type: application/json" \ -d "{\"machine_id\":\"machine_123\"}"
-    ```
-
-- Game Over Signal: You can trigger the /gameover API to send a game over signal using the following curl command:
-
-    ```bash
-    curl -X POST https://your-api-id.execute-api.your-region.amazonaws.com/prod/gameover \-H "Content-Type: application/json" \ -d "{\"machine_id\":\"machine_123\"}"
-    ```
-
-
-### Setting up Stripe Webhook on Stripe Dashboard with API Gateway
-
-To configure a Stripe webhook via the Stripe Dashboard and connect it to your API Gateway, follow these steps:
-
-1. Navigate to the Webhooks section in your Stripe Dashboard.
-
-2. Click "Add endpoint."
-
-3. Select the events you want to monitor. For this project, select the `checkout.session.completed` event.
-    - You can search for the event and select it in the event filter section.
-
-4. Add your API Gateway URL as the endpoint. The URL should be in the format:
-https://{api_gateway_id}.execute-api.{region}.amazonaws.com/prod/webhook
-
-Replace:
-- {api_gateway_id} with your actual API Gateway ID.
-- {region} with the AWS region your API Gateway is hosted in.
-
-Example:
-https://abc123.execute-api.us-east-1.amazonaws.com/webhook
-
-5. Click "Create endpoint" to finalize the webhook setup.
-
-
-## Stripe CLI Setup on Windows (Without Scoop)
-
-To install the Stripe CLI on Windows without using Scoop:
-
-1. Download the latest `windows` zip file from GitHub.
- 
-2. Unzip the `stripe_X.X.X_windows_x86_64.zip` file.
-
-3. Add the path to the unzipped `stripe.exe` file to your `Path` environment variable. To learn how to update environment variables, see the Microsoft PowerShell documentation.
-
-**Note:** Windows anti-virus scanners occasionally flag the Stripe CLI as unsafe. This is very likely a false positive. For more information, see issue #692 in the GitHub repository.
-## Notes
-
-- Make sure not to expose your Stripe API key and webhook secret publicly.
-- This API is intended for educational purposes and should not be used in production without proper security measures.
+- **Missing Environment Variables:**
+  - Verify all variables in `.env.local`
+- **Invalid Stripe API Keys:**
+  - Check key validity
+- **MQTT Connection Failures:**
+  - Verify credentials and network settings
+- **Docker Build Issues:**
+  - Use correct architecture settings
+- **API Gateway Integration:**
+  - Check Lambda proxy integration
+- **Webhook Verification:**
+  - Verify webhook secrets
