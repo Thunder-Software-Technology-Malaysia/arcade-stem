@@ -115,6 +115,7 @@ EMQX_PORT=8883
    - `MQTT_PASSWORD`: Password for MQTT broker authentication
    - `EMQX_BROKER_URL`: URL of your EMQX broker
    - `EMQX_PORT`: Port for MQTT broker
+   - `PRICE_ID` : Price_ID of the product
 
 3. **Obtaining API Keys:**
    - Stripe API Key:
@@ -175,8 +176,8 @@ EMQX is a highly scalable, open-source MQTT messaging broker designed for IoT sy
 # Publish coinpulse
 ```bash
 mosquitto_pub -h your-emqx-broker-url -p 8883 \
-  -t "arcade/machine/123/coinpulse" \
-  -m '{"machineId": "machine_123", "credits": 1, "timestamp": "2024-10-15T00:42:34.019303Z"}' \
+  -t "arcade/machine/your-machine-id/coinpulse" \
+  -m '{"machineId": "your-machine-id", "credits": 1, "timestamp": "timestamp-of-coinpulse"}' \
   --cafile "path/to/ca.crt" \
   -u "your-username" -P "your-password"
 ```
@@ -184,8 +185,8 @@ mosquitto_pub -h your-emqx-broker-url -p 8883 \
 # Publish gameover
 ```bash
 mosquitto_pub -h your-emqx-broker-url -p 8883 \
-  -t "arcade/machine/123/gameover" \
-  -m '{"machineId": "machine_123", "status": "game_over", "timestamp": "2024-10-15T02:42:34.019303Z"}' \
+  -t "arcade/machine/your-machine-id/gameover" \
+  -m '{"machineId": "your-machine-id", "status": "game_over", "timestamp": "timestamp-of-gameover"}' \
   --cafile "path/to/ca.crt" \
   -u "your-username" -P "your-password"
 ```
@@ -334,14 +335,18 @@ Examples provided in [Testing the Deployment](#43-testing-the-deployment) sectio
 ```bash
 curl -X POST https://your-api-id.execute-api.your-region.amazonaws.com/prod/create-payment-link \
 -H "Content-Type: application/json" \
--d "{\"machine_id\":\"machine_123\"}"
+-d "{\"machine_id\":\"your-machine-id\"}"
+```
+
+```bash
+curl -X POST https://your-api-id.execute-api.your-region.amazonaws.com/prod/create-payment-link -H "Content-Type: application/json" -d "{\"machine_id\":\"your-machine-id\", \"price_id\":\"your-price-id\", \"quantity\":your-quantity}"
 ```
 
 **Game Over Signal:**
 ```bash
 curl -X POST https://your-api-id.execute-api.your-region.amazonaws.com/prod/gameover \
 -H "Content-Type: application/json" \
--d "{\"machine_id\":\"machine_123\"}"
+-d "{\"machine_id\":\"your-machine-id\"}"
 ```
 
 ### 8.2 Setting up Stripe Webhook

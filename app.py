@@ -18,8 +18,8 @@ if not stripe.api_key:
     raise ValueError("No STRIPE_API_KEY set for Flask application")
 
 # MQTT settings
-MQTT_BROKER = 'g38a1ef7.ala.asia-southeast1.emqxsl.com'  # EMQX Cloud broker address
-MQTT_PORT = 8883  # SSL/TLS port
+MQTT_BROKER = os.getenv("MQTT_BROKER")  # EMQX Cloud broker address
+MQTT_PORT = int(os.getenv("MQTT_PORT"))  # SSL/TLS port
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CA_CERT_PATH = os.path.join(BASE_DIR, 'ca.crt')
 
@@ -78,18 +78,26 @@ def status():
         "status": "up",
         "message": "API is running"
     })
-
 @app.route('/create-payment-link', methods=['POST'])
 def create_payment_link():
     try:
         data = request.json
         machine_id = data.get('machine_id')
 
+        # Allow overriding of price_id if provided in the request body
+        price_id = data.get('price_id') or os.getenv("PRICE_ID")
+
+        # Allow overriding of quantity if provided, default to 1 if not present
+        quantity = data.get('quantity', 1)
+
+        if not price_id:
+            raise ValueError("PRICE_ID not provided and not set in environment")
+
         # Create a payment link via Stripe API
         payment_link = stripe.PaymentLink.create(
             line_items=[{
-                'price': 'price_1PuQrZ2MwOOp1GEXTkNAef1b',  # Replace with your actual Stripe price ID
-                'quantity': 1,
+                'price': price_id,  # Use the provided price ID or default from environment
+                'quantity': quantity,
             }],
             metadata={'machine_id': machine_id}  # Store machine_id in metadata
         )
