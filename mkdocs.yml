@@ -41,6 +41,14 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js
 
 nav:
   - Home: index.md
@@ -52,6 +60,7 @@ nav:
     - AWS Account: accounts/aws-setup.md
     - Stripe Account: accounts/stripe-setup.md
     - EMQX Account: accounts/emqx-setup.md
+    - GitHub Setup (optional): accounts/github-setup.md
   - Quick Deploy Path:
     - Overview: quick-deploy/overview.md
     - Pull Docker Image: quick-deploy/docker-pull.md
