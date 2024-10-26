@@ -57,22 +57,34 @@ nav:
     - What You'll Need: getting-started/prerequisites.md
     - Choose Your Path: getting-started/deployment-options.md
   - Setting Up Accounts:
-    - AWS Account: accounts/aws-setup.md
-    - Stripe Account: accounts/stripe-setup.md
-    - EMQX Account: accounts/emqx-setup.md
+    - AWS Setup: accounts/aws/basic-setup.md
+    - Container Registry: accounts/aws/container-registry.md
+    - EMQX Setup: accounts/emqx-setup.md
+    - Stripe:
+      - Basic Setup: accounts/stripe/stripe-setup.md
+      - Creating Webhooks: accounts/stripe/stripe-webhooks.md
     - GitHub Setup (optional): accounts/github-setup.md
-  - Quick Deploy Path:
+  - Quick Deploy:
     - Overview: quick-deploy/overview.md
     - Pull Docker Image: quick-deploy/docker-pull.md
-    - AWS Configuration: quick-deploy/aws-config.md
-    - Testing Your Setup: quick-deploy/testing.md
-  - Custom Build Path:
+    - Setting Up AWS Lambda: aws-lambda/lambda-setup.md
+    - Understanding API Gateway: aws-lambda/api-gateway-intro.md
+    - Configure API Gateway: aws-lambda/setup-gateway.md
+    - Test Your Deployment: aws-lambda/test-deployment.md
+    - Final Testing: quick-deploy/testing.md
+  - Custom Build:
     - Overview: custom-build/overview.md
-    - Understanding the Code: custom-build/code-overview.md
-    - Making Changes: custom-build/modifications.md
-    - Building & Deploying: custom-build/deployment.md
+    - Code Overview: custom-build/code-overview.md
+    - Build and Test: custom-build/build-and-test.md
+    - First Deployment: custom-build/first-deployment.md
+    - Setting Up AWS Lambda: aws-lambda/lambda-setup.md
+    - Understanding API Gateway: aws-lambda/api-gateway-intro.md
+    - Configure API Gateway: aws-lambda/setup-gateway.md
+    - Test Your Deployment: aws-lambda/test-deployment.md
+    - Making Modifications: custom-build/modifications.md
+    - Deploying Changes: custom-build/deploying-changes.md
   - How It Works:
-    - System Architecture: how-it-works/architecture.md
+    - Architecture: how-it-works/architecture.md
     - Payment Flow: how-it-works/payment-flow.md
     - Game Control: how-it-works/game-control.md
     - Cloud Services: how-it-works/cloud-services.md

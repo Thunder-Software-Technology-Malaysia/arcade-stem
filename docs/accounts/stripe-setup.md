@@ -94,6 +94,7 @@ Type: One-time payment
 
 [!INSERT SCREENSHOT: Product creation page with example fields filled]
 
+
 ## Test Your Setup :microscope:
 
 ### Using Test Card Numbers
@@ -169,8 +170,8 @@ After setting up Stripe:
 3. Set up your products
 4. Try some test transactions
 
-[Continue to EMQX Setup →](emqx-setup.md){ .md-button .md-button--primary }
-[Back to AWS Setup](aws-setup.md){ .md-button }
+[Continue to Stripe Webhook Setup →](stripe-webhooks.md){ .md-button .md-button--primary }
+[Back to AWS Setup](../aws/basic-setup){ .md-button }
 
 ## Troubleshooting :wrench:
 
