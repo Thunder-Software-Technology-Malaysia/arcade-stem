@@ -67,20 +67,20 @@ nav:
   - Quick Deploy:
     - Overview: quick-deploy/overview.md
     - Pull Docker Image: quick-deploy/docker-pull.md
-    - Setting Up AWS Lambda: aws-lambda/lambda-setup.md
-    - Understanding API Gateway: aws-lambda/api-gateway-intro.md
-    - Configure API Gateway: aws-lambda/setup-gateway.md
-    - Test Your Deployment: aws-lambda/test-deployment.md
+    - Setting Up AWS Lambda: quick-deploy/aws-lambda/quick-deploy-lambda-setup.md
+    - Understanding API Gateway: quick-deploy/aws-lambda/api-gateway-intro.md
+    - Configure API Gateway: quick-deploy/aws-lambda/setup-gateway.md
+    - Test Your Deployment: quick-deploy/aws-lambda/test-deployment.md
     - Final Testing: quick-deploy/testing.md
   - Custom Build:
     - Overview: custom-build/overview.md
     - Code Overview: custom-build/code-overview.md
     - Build and Test: custom-build/build-and-test.md
     - First Deployment: custom-build/first-deployment.md
-    - Setting Up AWS Lambda: aws-lambda/lambda-setup.md
-    - Understanding API Gateway: aws-lambda/api-gateway-intro.md
-    - Configure API Gateway: aws-lambda/setup-gateway.md
-    - Test Your Deployment: aws-lambda/test-deployment.md
+    - Setting Up AWS Lambda: custom-build/aws-lambda/lambda-setup.md
+    - Understanding API Gateway: custom-build/aws-lambda/api-gateway-intro.md
+    - Configure API Gateway: custom-build/aws-lambda/setup-gateway.md
+    - Test Your Deployment: custom-build/aws-lambda/test-deployment.md
     - Making Modifications: custom-build/modifications.md
     - Deploying Changes: custom-build/deploying-changes.md
   - How It Works:

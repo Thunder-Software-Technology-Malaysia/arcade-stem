@@ -185,5 +185,5 @@ Now that your container is in ECR:
 2. Keep your environment variables handy
 3. Get ready to set up your Lambda function!
 
-[Set Up AWS Lambda →](../aws-lambda/lambda-setup.md){ .md-button .md-button--primary }
+[Set Up AWS Lambda →](aws-lambda/lambda-setup.md){ .md-button .md-button--primary }
 [Back to Build and Test](build-and-test.md){ .md-button }
