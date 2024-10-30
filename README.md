@@ -1,5 +1,7 @@
 # Arcade STEM API with EMQX Serverless MQTT Integration
 
+For a complete guide on Arcade STEM, please refer to the markdown [Link](/doc/). If you are an experienced developer, the following documentation should be sufficient.
+
 This repository contains a robust solution for managing arcade machine states and handling payments using a Flask API integrated with Stripe and EMQX for MQTT messaging. The API is containerized using Docker and deployed to AWS Lambda using an Amazon ECR (Elastic Container Registry) image. The MQTT broker is deployed in a serverless environment using EMQX, ensuring scalability and high performance without the need to manage underlying infrastructure.
 
 ## Table of Contents
@@ -108,6 +110,7 @@ EMQX_PORT=8883
 ```
 
 2. **Variable Descriptions:**
+  Create a .env.local file in the root directory:
    - `STRIPE_API_KEY`: Your Stripe Secret API Key
    - `STRIPE_WEBHOOK_SECRET`: Your Stripe Webhook Secret
    - `STRIPE_PRICE_ID`: The Stripe Price ID for the product/service
@@ -217,57 +220,57 @@ mosquitto_sub -h your-emqx-broker-url -p 8883 \
 - Docker Desktop
 - AWS CLI (Version 2)
 
-### 5.2 Finding Your Amazon ECR Repository
+### 5.2 Amazon ECR Setup
 
-1. Log in to AWS Management Console
-2. Navigate to ECR service
-3. Create or use existing repository
-4. Copy Repository URI
+1. **Log in to AWS Management Console**:
+   - Navigate to ECR service.
+   - Create or use an existing repository.
+   - Copy the **Repository URI**.
 
 ### 5.3 Deploy to AWS Lambda
 
-1. **Build Docker Image:**
-   ```shell
-   docker build --no-cache -t arcade-game-app .
-   ```
+1. **Build Docker Image**:
+    - windows / linux
+     ```bash
+     docker build -t arcade-game-app .
+     ```
+   - macOS running on ARM chip
+     ```bash
+     docker buildx build --platform linux/amd64 -t arcade-game-app .
+     ```
 
-2. **Tag Docker Image:**
-   ```shell
-   docker tag arcade-game-app:latest your-account-id.dkr.ecr.your-region.amazonaws.com/arcade-game:latest
-   ```
+2. **Tag Docker Image**:
+   - Tag the Docker image to match your ECR repository:
+     ```bash
+     docker tag arcade-game-app:latest <account-id>.dkr.ecr.<region>.amazonaws.com/arcade-game:latest
+     ```
 
-3. **Authenticate Docker to AWS ECR:**
-   ```shell
-   aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
-   ```
+3. **Authenticate Docker to AWS ECR**:
+   - Use the AWS CLI to authenticate:
+     ```bash
+     aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com
+     ```
 
-4. **Push Image to AWS ECR:**
-   ```shell
-   docker push your-account-id.dkr.ecr.your-region.amazonaws.com/arcade-game:latest
-   ```
+4. **Push Image to AWS ECR**:
+   - Push the Docker image to your ECR repository:
+     ```bash
+     docker push <account-id>.dkr.ecr.<region>.amazonaws.com/arcade-game:latest
+     ```
 
-5. **Deploy to Lambda:**
-   - Create Lambda function
-   - Select container image
-   - Configure environment variables
-   - Set up API Gateway integration
-
-### 5.4 Docker Build Architecture Issue on M3 MacBook Pro
-
-**Problem:** Deployment fails with exec format error on M3 MacBooks.
-
-**Solution:**
-```shell
-docker buildx build --platform linux/amd64 --no-cache -t arcade-game-app .
-```
+5. **Deploy to Lambda**:
+   - Create a Lambda function in the AWS console, selecting **Container image** as the deployment package.
+   - Configure environment variables.
+   - Set up API Gateway integration if needed.
 
 ## 6. API Endpoints
 
-### 6.1 Status Endpoint
+Below are the endpoints for structure and clarity.
 
-- **URL:** `/status`
-- **Method:** GET
-- **Response:**
+### 6.1 `/status` Endpoint
+
+- **Method**: `GET`
+- **Description**: Health check to ensure the API is up and running.
+- **Response**:
   ```json
   {
     "status": "up",
@@ -275,41 +278,42 @@ docker buildx build --platform linux/amd64 --no-cache -t arcade-game-app .
   }
   ```
 
-### 6.2 Create Payment Link Endpoint
+### 6.2 `/create-payment-link` Endpoint
 
-- **URL:** `/create-payment-link`
-- **Method:** POST
-- **Request Body:**
+- **Method**: `POST`
+- **Description**: Creates a payment link for a specific arcade game machine.
+- **Request Body**:
   ```json
   {
     "machine_id": "unique_machine_id"
   }
   ```
-- **Response:**
+- **Response**:
   ```json
   {
     "url": "https://payment-link.url"
   }
   ```
 
-### 6.3 Stripe Webhook Endpoint
+### 6.3 `/addCredit` Endpoint
 
-- **URL:** `/webhook`
-- **Method:** POST
-- **Description:** Handles Stripe events
-- **Response:** 200 OK or 400 Error
+- **Method**: `POST`
+- **Description**: Handles incoming Stripe webhook events for payment updates.
+- **Request Handling**:
+  - Validates Stripe's signature to ensure authenticity.
+  - Responds with `200 OK` if successful, otherwise `400 Error`.
 
-### 6.4 Game Over Endpoint
+### 6.4 `/gameover` Endpoint
 
-- **URL:** `/gameover`
-- **Method:** POST
-- **Request Body:**
+- **Method**: `POST`
+- **Description**: Records the end of a game session.
+- **Request Body**:
   ```json
   {
     "machine_id": "unique_machine_id"
   }
   ```
-- **Response:**
+- **Response**:
   ```json
   {
     "message": "Game over signal sent"
