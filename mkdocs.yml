@@ -1,7 +1,7 @@
-site_name: DIY Arcade Cabinet Project
-site_url: https://your-github-username.github.io/project-name
-repo_url: https://github.com/your-github-username/project-name
-repo_name: your-github-username/project-name
+site_name: DIY Arcade Cabinet Payment Integration Project
+site_url: https://thunder-software-technology-malaysia.github.io/arcade-stem/
+repo_url: https://github.com/Thunder-Software-Technology-Malaysia/arcade-stem
+repo_name: Thunder-Software-Technology-Malaysia/arcade-stem
 
 theme:
   name: material
