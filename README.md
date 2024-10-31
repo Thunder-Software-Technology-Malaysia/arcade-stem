@@ -1,6 +1,6 @@
 # Arcade STEM API with EMQX Serverless MQTT Integration
 
-For a complete guide on Arcade STEM, please refer to the markdown [Link](/doc/). If you are an experienced developer, the following documentation should be sufficient.
+If you’re a STEM/STEAM student or a first-time developer looking for a project walkthrough and detailed documentation, please visit our GitHub Pages documentation site at [Link](/doc/). If you’re an experienced developer, the provided documentation should be sufficient.
 
 This repository contains a robust solution for managing arcade machine states and handling payments using a Flask API integrated with Stripe and EMQX for MQTT messaging. The API is containerized using Docker and deployed to AWS Lambda using an Amazon ECR (Elastic Container Registry) image. The MQTT broker is deployed in a serverless environment using EMQX, ensuring scalability and high performance without the need to manage underlying infrastructure.
 
