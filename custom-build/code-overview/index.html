@@ -2170,15 +2170,15 @@
 
 
 <h1 id="understanding-the-code">Understanding the Code</h1>
-<p>Welcome to the code overview! Let's break down how our arcade payment system works under the hood. <img alt="⚙" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2699.svg" title=":gear:" /></p>
-<h2 id="system-architecture-overview">System Architecture Overview <img alt="🏗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f3d7.svg" title=":building_construction:" /></h2>
+<p>Welcome to the code overview! Let's break down how our arcade payment system works under the hood. <img alt="⚙" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2699.svg" title=":gear:" /></p>
+<h2 id="system-architecture-overview">System Architecture Overview <img alt="🏗" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f3d7.svg" title=":building_construction:" /></h2>
 <p>Our arcade payment system consists of several key components working together:</p>
 <pre class="mermaid"><code>graph TD
     A[Arcade Cabinet] --&gt;|MQTT| B[EMQX Cloud]
     C[Payment QR Code] --&gt;|Stripe| D[Cloud API]
     D --&gt;|MQTT| B
     B --&gt;|Messages| A</code></pre>
-<h2 id="main-application-code">Main Application Code <img alt="💻" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f4bb.svg" title=":computer:" /></h2>
+<h2 id="main-application-code">Main Application Code <img alt="💻" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4bb.svg" title=":computer:" /></h2>
 <p>Our main application (<code>app.py</code>) handles payment processing and game control. Let's break it down section by section:</p>
 <h3 id="1-import-and-setup">1. Import and Setup</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">os</span>
@@ -2234,7 +2234,7 @@
 <li>The game starts!</li>
 </ol>
 </div>
-<h3 id="2-mqtt-configuration">2. MQTT Configuration <img alt="📡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f4e1.svg" title=":satellite:" /></h3>
+<h3 id="2-mqtt-configuration">2. MQTT Configuration <img alt="📡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4e1.svg" title=":satellite:" /></h3>
 <p>The MQTT client helps our system communicate with the arcade cabinet:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">client</span> <span class="o">=</span> <span class="n">mqtt</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">client</span><span class="o">.</span><span class="n">username_pw_set</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;MQTT_USERNAME&quot;</span><span class="p">),</span> 
@@ -2244,7 +2244,7 @@
 <p class="admonition-title">What is MQTT?</p>
 <p>MQTT is like a text messaging system for machines. It lets our cloud service "text" the arcade cabinet when someone pays!</p>
 </div>
-<h3 id="3-key-endpoints">3. Key Endpoints <img alt="🚪" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f6aa.svg" title=":door:" /></h3>
+<h3 id="3-key-endpoints">3. Key Endpoints <img alt="🚪" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f6aa.svg" title=":door:" /></h3>
 <h4 id="status-check">Status Check</h4>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/status&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span> <span class="nf">status</span><span class="p">():</span>
@@ -2305,7 +2305,7 @@ This tells us if our system is running.</p>
 2. System updates status and the &quot;attract screen&quot; begins playing
 3. Ready for next player
 </code></pre></div>
-<h2 id="message-formats">Message Formats <img alt="✉" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2709.svg" title=":envelope:" /></h2>
+<h2 id="message-formats">Message Formats <img alt="✉" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2709.svg" title=":envelope:" /></h2>
 <h3 id="coin-pulse-signal">Coin Pulse Signal</h3>
 <p>This tells the cabinet to add credits:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
@@ -2322,7 +2322,7 @@ This tells us if our system is running.</p>
 <a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-07-01T12:30:00Z&quot;</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">}</span>
 </code></pre></div></p>
-<h2 id="docker-configuration">Docker Configuration <img alt="🐳" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f433.svg" title=":whale:" /></h2>
+<h2 id="docker-configuration">Docker Configuration <img alt="🐳" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f433.svg" title=":whale:" /></h2>
 <p>Our <code>Dockerfile</code> sets up the environment:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">public.ecr.aws/lambda/python:3.9</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">COPY</span><span class="w"> </span>app.py<span class="w"> </span>ca.crt<span class="w"> </span><span class="si">${</span><span class="nv">LAMBDA_TASK_ROOT</span><span class="si">}</span>
@@ -2334,7 +2334,7 @@ This tells us if our system is running.</p>
 <p class="admonition-title">Why Docker?</p>
 <p>Docker is like a shipping container for code. It ensures our code runs the same way everywhere!</p>
 </div>
-<h2 id="required-libraries">Required Libraries <img alt="📚" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f4da.svg" title=":books:" /></h2>
+<h2 id="required-libraries">Required Libraries <img alt="📚" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4da.svg" title=":books:" /></h2>
 <p>Our <code>requirements.txt</code> lists what we need:
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Flask==3.0.3
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>python-dotenv==1.0.1
@@ -2365,7 +2365,7 @@ This tells us if our system is running.</p>
 </ul>
 <p>That's exactly what our <code>requirements.txt</code> file does - it's like our shopping list of cookbooks!</p>
 </div>
-<h2 id="security-features">Security Features <img alt="🔒" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f512.svg" title=":lock:" /></h2>
+<h2 id="security-features">Security Features <img alt="🔒" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f512.svg" title=":lock:" /></h2>
 <p>The code includes several security measures:</p>
 <div class="highlight"><pre><span></span><code>* SSL/TLS encryption for MQTT
 * Stripe webhook verification
@@ -2376,7 +2376,7 @@ This tells us if our system is running.</p>
 <p class="admonition-title">API Keys</p>
 <p>Never share your API keys or passwords! They should always stay secret.</p>
 </div>
-<h2 id="code-flow-examples">Code Flow Examples <img alt="🔄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f504.svg" title=":arrows_counterclockwise:" /></h2>
+<h2 id="code-flow-examples">Code Flow Examples <img alt="🔄" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f504.svg" title=":arrows_counterclockwise:" /></h2>
 <h3 id="payment-flow">Payment Flow</h3>
 <div class="highlight"><pre><span></span><code>1. Player scans QR code
 2. System creates Stripe payment
@@ -2391,7 +2391,7 @@ This tells us if our system is running.</p>
 3. System updates status
 4. Ready for next player
 </code></pre></div>
-<h2 id="next-steps">Next Steps <img alt="👣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f463.svg" title=":footprints:" /></h2>
+<h2 id="next-steps">Next Steps <img alt="👣" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f463.svg" title=":footprints:" /></h2>
 <p>Now that you understand the code:</p>
 <div class="highlight"><pre><span></span><code>1. Try making small changes
 2. Test different features

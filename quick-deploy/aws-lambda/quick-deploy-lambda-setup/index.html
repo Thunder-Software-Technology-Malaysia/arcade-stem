@@ -1924,8 +1924,8 @@
 
 
 <h1 id="setting-up-aws-lambda">Setting Up AWS Lambda</h1>
-<p>Welcome to the AWS Lambda setup guide! Now that you have the Docker image on your computer, let's get it running in the cloud! <img alt="⚡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a1.svg" title=":zap:" /></p>
-<h2 id="prerequisites">Prerequisites <img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f4cb.svg" title=":clipboard:" /></h2>
+<p>Welcome to the AWS Lambda setup guide! Now that you have the Docker image on your computer, let's get it running in the cloud! <img alt="⚡" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a1.svg" title=":zap:" /></p>
+<h2 id="prerequisites">Prerequisites <img alt="📋" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4cb.svg" title=":clipboard:" /></h2>
 <p>Before starting, make sure you have:</p>
 <ul>
 <li>Completed <a href="../accounts/aws/basic-setup.md">Basic AWS Setup</a></li>
@@ -1933,7 +1933,7 @@
 <li>AWS CLI installed and configured</li>
 <li>Your terminal or PowerShell still open</li>
 </ul>
-<h2 id="step-1-push-to-amazon-ecr">Step 1: Push to Amazon ECR <img alt="⬆" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2b06.svg" title=":arrow_up:" /></h2>
+<h2 id="step-1-push-to-amazon-ecr">Step 1: Push to Amazon ECR <img alt="⬆" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2b06.svg" title=":arrow_up:" /></h2>
 <p>First, we need to get your Docker image into AWS's container registry (ECR):</p>
 <ol>
 <li>
@@ -1963,7 +1963,7 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
 </code></pre></div></p>
 </div>
-<h2 id="step-2-create-lambda-function">Step 2: Create Lambda Function <img alt="⚙" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/2699.svg" title=":gear:" /></h2>
+<h2 id="step-2-create-lambda-function">Step 2: Create Lambda Function <img alt="⚙" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2699.svg" title=":gear:" /></h2>
 <p>Now that your image is in ECR, let's create your Lambda function:</p>
 <ol>
 <li>Go to AWS Console</li>
@@ -1991,7 +1991,7 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 <li>Stays within the free tier!</li>
 </ul>
 </div>
-<h2 id="step-3-configure-environment">Step 3: Configure Environment <img alt="🔧" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f527.svg" title=":wrench:" /></h2>
+<h2 id="step-3-configure-environment">Step 3: Configure Environment <img alt="🔧" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f527.svg" title=":wrench:" /></h2>
 <p>Your Lambda function needs some secret information to work:</p>
 <ol>
 <li>
@@ -2019,7 +2019,7 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 <p class="admonition-title">Keep Secrets Safe!</p>
 <p>Never share these values with anyone! They're like the keys to your arcade's payment system.</p>
 </div>
-<h2 id="step-4-test-your-function">Step 4: Test Your Function <img alt="🧪" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f9ea.svg" title=":test_tube:" /></h2>
+<h2 id="step-4-test-your-function">Step 4: Test Your Function <img alt="🧪" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f9ea.svg" title=":test_tube:" /></h2>
 <p>Let's make sure everything works:</p>
 <ol>
 <li>Click the "Test" tab</li>
@@ -2032,7 +2032,7 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 <li>Click "Test"</li>
 </ol>
 <p>You should see a successful response!</p>
-<h2 id="step-5-monitor-your-function">Step 5: Monitor Your Function <img alt="📈" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f4c8.svg" title=":chart_with_upwards_trend:" /></h2>
+<h2 id="step-5-monitor-your-function">Step 5: Monitor Your Function <img alt="📈" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f4c8.svg" title=":chart_with_upwards_trend:" /></h2>
 <p>Set up basic monitoring:</p>
 <ol>
 <li>Go to "Monitor" tab</li>
@@ -2048,7 +2048,7 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 <li>Plenty for several arcade cabinets!</li>
 </ul>
 </div>
-<h2 id="next-steps">Next Steps <img alt="▶" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/25b6.svg" title=":arrow_forward:" /></h2>
+<h2 id="next-steps">Next Steps <img alt="▶" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/25b6.svg" title=":arrow_forward:" /></h2>
 <p>Your Lambda function is ready! Next, we'll:</p>
 <ol>
 <li>Set up API Gateway</li>
@@ -2057,7 +2057,7 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 </ol>
 <p><a class="md-button md-button--primary" href="../api-gateway-intro/">Continue to API Gateway Setup →</a>
 <a class="md-button" href="docker-pull.md">Back to Docker Pull</a></p>
-<h2 id="troubleshooting">Troubleshooting <img alt="🔧" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/1f527.svg" title=":wrench:" /></h2>
+<h2 id="troubleshooting">Troubleshooting <img alt="🔧" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f527.svg" title=":wrench:" /></h2>
 <h3 id="common-issues">Common Issues</h3>
 <p><strong>Push to ECR Failed</strong></p>
 <ul>
