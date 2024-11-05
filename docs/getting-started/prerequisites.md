@@ -152,7 +152,7 @@ Ready to begin? Make sure you:
 4. Create your free accounts
 5. Bookmark this documentation!
 
-[Get Started with Installation](../tutorials/basic-setup.md){ .md-button .md-button--primary }
+[Get Started with Quick Deploy](../quick-deploy/overview.md){ .md-button .md-button--primary }
 [Need Help?](../troubleshooting/getting-help.md){ .md-button }
 
 !!! question "Questions or Problems?"

@@ -180,7 +180,7 @@ stripe listen --forward-to localhost:5000/webhook
 4. Use official support channels if needed
 
 [Back to Common Issues](common-issues.md){ .md-button }
-[Return to Tutorials](../tutorials/basic-setup.md){ .md-button .md-button--primary }
+[Return to Home](../index.md){ .md-button .md-button--primary }
 
 !!! success "You've Got This!"
     Remember: Every developer was a beginner once. Don't be afraid to ask for help - it's part of learning! :star:
