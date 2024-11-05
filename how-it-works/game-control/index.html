@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#game-control" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1315,6 +1320,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Game Control
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1325,6 +1343,154 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Overview 🎯
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-games-are-controlled" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Games Are Controlled 🕹️
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How Games Are Controlled 🕹️">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. State Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-credit-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Credit System 💰
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-game-start-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Game Start Process 🚀
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-during-gameplay" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. During Gameplay ⚡
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-game-over-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Game Over Handling 🔄
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling 🔧
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling 🔧">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-game-crashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Game Crashes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-power-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Power Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-game-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Game Control 🧪
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring &amp; Debugging 📊
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps 🚀
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1685,6 +1851,145 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Overview 🎯
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-games-are-controlled" class="md-nav__link">
+    <span class="md-ellipsis">
+      How Games Are Controlled 🕹️
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How Games Are Controlled 🕹️">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. State Management
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-credit-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Credit System 💰
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-game-start-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Game Start Process 🚀
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-during-gameplay" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. During Gameplay ⚡
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-game-over-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Game Over Handling 🔄
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling 🔧
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling 🔧">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-game-crashes" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Game Crashes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-power-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Power Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-game-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Game Control 🧪
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring &amp; Debugging 📊
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps 🚀
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1702,9 +2007,288 @@
   
 
 
-  <h1>Game Control</h1>
-
-
+<h1 id="game-control">Game Control</h1>
+<p>Welcome to the game control guide! Here's where we'll explore how your arcade system manages games - from starting them up to handling game overs. Let's dive in! 🎮</p>
+<h2 id="quick-overview">Quick Overview 🎯</h2>
+<p>Your arcade's game control system:</p>
+<ul>
+<li>Starts games when players pay</li>
+<li>Manages credits and play time</li>
+<li>Handles game over signals</li>
+<li>Controls the attract screen</li>
+<li>Keeps everything in sync</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Think of it Like a DJ System</p>
+<ul>
+<li>The attract screen is like playing music between sets</li>
+<li>Starting a game is like starting your main playlist</li>
+<li>Game over is like finishing your set</li>
+<li>The system smoothly transitions between these modes!</li>
+</ul>
+</div>
+<h2 id="how-games-are-controlled">How Games Are Controlled 🕹️</h2>
+<h3 id="1-state-management">1. State Management</h3>
+<pre class="mermaid"><code>stateDiagram-v2
+    [*] --&gt; AttractMode
+    AttractMode --&gt; GamePlay: Coin Pulse
+    GamePlay --&gt; AttractMode: Game Over
+    GamePlay --&gt; GamePlay: Additional Credits</code></pre>
+<p>Your cabinet has two main states:</p>
+<ol>
+<li>
+<p><strong>Attract Mode</strong></p>
+<ul>
+<li>Shows demo animations</li>
+<li>Displays QR code</li>
+<li>Waits for payment</li>
+<li>Monitors for coin pulse</li>
+</ul>
+</li>
+<li>
+<p><strong>Game Play Mode</strong></p>
+<ul>
+<li>Runs the active game</li>
+<li>Tracks remaining credits</li>
+<li>Monitors game status</li>
+<li>Listens for game over</li>
+</ul>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">State Transitions</p>
+<p>The system smoothly handles changes between states:</p>
+<ul>
+<li>Attract → Game: When payment received</li>
+<li>Game → Attract: When game ends</li>
+<li>Game → Game: When more credits added</li>
+</ul>
+</div>
+<h3 id="2-credit-system">2. Credit System 💰</h3>
+<p>The credit system manages:</p>
+<pre class="mermaid"><code>graph TD
+    A[Payment Received] --&gt;|Add Credits| B[Credit Counter]
+    B --&gt;|Credits &gt; 0| C[Enable Game]
+    B --&gt;|Credits = 0| D[Return to Attract]
+    C --&gt;|Game Over| E[Decrease Credits]
+    E --&gt;|Check Credits| B
+    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style B fill:#f0f0f0,stroke:#333,stroke-width:2px
+    style C fill:#e1e1e1,stroke:#333,stroke-width:2px
+    style D fill:#d3d3d3,stroke:#333,stroke-width:2px
+    style E fill:#c5c5c5,stroke:#333,stroke-width:2px</code></pre>
+<ul>
+<li>Credit addition from payments</li>
+<li>Credit deduction after games</li>
+<li>Multi-credit game support</li>
+<li>Credit persistence</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Credit Scenarios</p>
+<p>Here's how credits work:</p>
+<ul>
+<li>Player pays $1 → 1 credit added</li>
+<li>Game starts → 1 credit used</li>
+<li>Player adds more credits → Queue for next game</li>
+<li>Game ends → Check for remaining credits</li>
+</ul>
+</div>
+<h3 id="3-game-start-process">3. Game Start Process 🚀</h3>
+<p>When credits are added:</p>
+<ol>
+<li>
+<p>System receives coin pulse message
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;machineId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-machine-id&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;credits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-07-01T12:00:00Z&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>The cabinet software:</p>
+<ul>
+<li>Verifies the machine ID</li>
+<li>Adds the specified credits</li>
+<li>Switches to game mode</li>
+<li>Starts the game</li>
+</ul>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Start-up Checks</p>
+<p>Before starting a game, the system verifies:</p>
+<ul>
+<li>Valid machine ID</li>
+<li>Sufficient credits</li>
+<li>Game is ready</li>
+<li>No active games running</li>
+</ul>
+</div>
+<h3 id="4-during-gameplay">4. During Gameplay ⚡</h3>
+<p>While a game is running:</p>
+<ul>
+<li>System monitors game status</li>
+<li>Tracks remaining credits</li>
+<li>Listens for game over</li>
+<li>Handles additional payments</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Multi-Credit Games</p>
+<p>Some games might need multiple credits:</p>
+<ul>
+<li>Fighting games: 1 credit per player</li>
+<li>Premium games: 2 credits per play</li>
+<li>Extended play: Credits for continue</li>
+</ul>
+</div>
+<h3 id="5-game-over-handling">5. Game Over Handling 🔄</h3>
+<p>When a game ends:</p>
+<ol>
+<li>
+<p>Game sends over signal
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">&quot;machineId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-machine-id&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;game_over&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-07-01T12:30:00Z&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>System processes game over:</p>
+<ul>
+<li>Updates credit count</li>
+<li>Checks for remaining credits</li>
+<li>Decides next state</li>
+<li>Updates display</li>
+</ul>
+</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Game Over Flow</p>
+<p>The system checks:</p>
+<ol>
+<li>Are there more credits?<ul>
+<li>Yes → Start new game</li>
+<li>No → Return to attract mode</li>
+</ul>
+</li>
+<li>Was this a multi-credit game?<ul>
+<li>Update credit display</li>
+<li>Handle any remaining balance</li>
+</ul>
+</li>
+</ol>
+</div>
+<h2 id="error-handling">Error Handling 🔧</h2>
+<p>The system handles various game control issues:</p>
+<h3 id="1-game-crashes">1. Game Crashes</h3>
+<p>If a game crashes:</p>
+<ul>
+<li>Credits are preserved</li>
+<li>System logs the error</li>
+<li>Cabinet returns to attract mode</li>
+<li>Player can start again</li>
+</ul>
+<h3 id="2-power-issues">2. Power Issues</h3>
+<p>If power is lost:</p>
+<ul>
+<li>Credit state is saved</li>
+<li>System recovers on restart</li>
+<li>Games resume if possible</li>
+<li>Players don't lose credits</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Data Protection</p>
+<p>The system protects player credits by:</p>
+<ul>
+<li>Saving credit state regularly</li>
+<li>Using persistent storage</li>
+<li>Implementing recovery logic</li>
+<li>Maintaining transaction logs</li>
+</ul>
+</div>
+<h2 id="testing-game-control">Testing Game Control 🧪</h2>
+<p>You can test the system using:</p>
+<ol>
+<li>
+<p>Manual Tests:</p>
+<ul>
+<li>Add test credits</li>
+<li>Start games</li>
+<li>Trigger game overs</li>
+<li>Check state transitions</li>
+</ul>
+</li>
+<li>
+<p>Automated Tests:</p>
+<ul>
+<li>Send test MQTT messages</li>
+<li>Verify credit handling</li>
+<li>Check state management</li>
+<li>Test error recovery</li>
+</ul>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Testing Best Practices</p>
+<p>Always test:</p>
+<ul>
+<li>Multiple credit scenarios</li>
+<li>Rapid game starts/stops</li>
+<li>Power loss recovery</li>
+<li>Multi-player games</li>
+</ul>
+</div>
+<h2 id="monitoring-debugging">Monitoring &amp; Debugging 📊</h2>
+<p>Keep track of your games:</p>
+<ol>
+<li>
+<p>System Logs:</p>
+<ul>
+<li>Game start/stop events</li>
+<li>Credit changes</li>
+<li>Error conditions</li>
+<li>State transitions</li>
+</ul>
+</li>
+<li>
+<p>MQTT Messages:</p>
+<ul>
+<li>Coin pulse receipts</li>
+<li>Game over signals</li>
+<li>State changes</li>
+<li>Error notifications</li>
+</ul>
+</li>
+<li>
+<p>Cabinet Status:</p>
+<ul>
+<li>Current game state</li>
+<li>Credit count</li>
+<li>Active players</li>
+<li>System health</li>
+</ul>
+</li>
+</ol>
+<h2 id="next-steps">Next Steps 🚀</h2>
+<p>Now that you understand game control:</p>
+<ol>
+<li>Learn about <a href="../cloud-services/">Cloud Services</a></li>
+<li>Try testing different scenarios</li>
+<li>Explore credit management</li>
+</ol>
+<p><a class="md-button md-button--primary" href="../cloud-services/">Continue to Cloud Services →</a>
+<a class="md-button" href="../payment-flow/">Back to Payment Flow</a></p>
+<div class="admonition question">
+<p class="admonition-title">Need Help?</p>
+<ul>
+<li>Check our <a href="../../troubleshooting/common-issues/">Troubleshooting Guide</a></li>
+<li>Ask your teacher or mentor</li>
+<li>Review the code examples</li>
+<li>Try our game control tutorials</li>
+</ul>
+</div>
 
 
 

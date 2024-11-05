@@ -73,6 +73,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#payment-flow" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1294,6 +1299,19 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Payment Flow
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -1304,6 +1322,178 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Overview 🎯
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-payment-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed Payment Flow 🔄
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Payment Flow 🔄">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qr-code-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. QR Code Generation 📱
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-payment-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Payment Processing 💳
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-webhook-notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Webhook Notification 📨
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-credit-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Credit Management 🎮
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Formats 📝
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Formats 📝">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coin-pulse-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coin Pulse Message
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-confirmation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Confirmation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling 🔧
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling 🔧">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Failures
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Payments 🧪
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring &amp; Debugging 📊
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps 🚀
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1685,6 +1875,169 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#quick-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quick Overview 🎯
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-payment-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Detailed Payment Flow 🔄
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Payment Flow 🔄">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-qr-code-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. QR Code Generation 📱
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-payment-processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Payment Processing 💳
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-webhook-notification" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Webhook Notification 📨
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-credit-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Credit Management 🎮
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#message-formats" class="md-nav__link">
+    <span class="md-ellipsis">
+      Message Formats 📝
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Message Formats 📝">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#coin-pulse-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Coin Pulse Message
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#payment-confirmation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Confirmation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Error Handling 🔧
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling 🔧">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#payment-failures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Payment Failures
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#network-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-payments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing Payments 🧪
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#monitoring-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      Monitoring &amp; Debugging 📊
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps 🚀
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -1702,9 +2055,265 @@
   
 
 
-  <h1>Payment Flow</h1>
-
-
+<h1 id="payment-flow">Payment Flow</h1>
+<p>Welcome to the payment flow guide! Let's explore how money gets from a player's phone to your arcade cabinet. Let's make this fun! 💸</p>
+<h2 id="quick-overview">Quick Overview 🎯</h2>
+<p>Here's the basic flow when someone wants to play your arcade:</p>
+<ol>
+<li>Player sees QR code on cabinet</li>
+<li>Scans code with phone</li>
+<li>Makes payment through Stripe</li>
+<li>Game starts automatically!</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Think of it Like a Vending Machine</p>
+<ul>
+<li>The QR code is like the card reader</li>
+<li>Stripe is like the payment processor inside</li>
+<li>The coin pulse is like the spiral turning to drop your snack</li>
+<li>The game starting is like getting your treat!</li>
+</ul>
+</div>
+<h2 id="detailed-payment-flow">Detailed Payment Flow 🔄</h2>
+<p>Let's break down exactly what happens in each step:</p>
+<h3 id="1-qr-code-generation">1. QR Code Generation 📱</h3>
+<pre class="mermaid"><code>graph LR
+    A[Cabinet Display] --&gt;|Shows| B[QR Code]
+    B --&gt;|Links to| C[Stripe Payment]
+    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style B fill:#f0f0f0,stroke:#333,stroke-width:2px
+    style C fill:#e1e1e1,stroke:#333,stroke-width:2px</code></pre>
+<ul>
+<li>Your cabinet shows a QR code during attract mode</li>
+<li>Each code is unique to your cabinet</li>
+<li>The code contains your cabinet's ID</li>
+<li>QR codes are generated through Stripe</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">How QR Codes Work</p>
+<p>The QR code contains a special URL that:</p>
+<ul>
+<li>Links to your Stripe payment page</li>
+<li>Includes your cabinet's ID</li>
+<li>Sets the correct price</li>
+<li>Ensures proper tracking</li>
+</ul>
+</div>
+<h3 id="2-payment-processing">2. Payment Processing 💳</h3>
+<pre class="mermaid"><code>graph TD
+    A[Player's Phone] --&gt;|Scans| B[QR Code]
+    B --&gt;|Opens| C[Stripe Payment Page]
+    C --&gt;|Processes| D[Payment]
+    D --&gt;|Notifies| E[Your API]
+    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style B fill:#f0f0f0,stroke:#333,stroke-width:2px
+    style C fill:#e1e1e1,stroke:#333,stroke-width:2px
+    style D fill:#d3d3d3,stroke:#333,stroke-width:2px
+    style E fill:#c5c5c5,stroke:#333,stroke-width:2px</code></pre>
+<p>When a player pays:</p>
+<ol>
+<li>They scan your QR code</li>
+<li>Their phone shows the Stripe payment page</li>
+<li>They enter their payment info</li>
+<li>Stripe processes the payment</li>
+<li>Success! Time for the next step</li>
+</ol>
+<div class="admonition example">
+<p class="admonition-title">Payment Page Example</p>
+<p>Your payment page shows:</p>
+<ul>
+<li>Your arcade name</li>
+<li>The price per play</li>
+<li>Secure payment form</li>
+<li>Confirmation message</li>
+</ul>
+</div>
+<h3 id="3-webhook-notification">3. Webhook Notification 📨</h3>
+<p>After successful payment:</p>
+<ol>
+<li>Stripe immediately sends a webhook to your API</li>
+<li>Your API verifies the webhook is legitimate</li>
+<li>The webhook contains:<ul>
+<li>Payment amount</li>
+<li>Cabinet ID</li>
+<li>Transaction details</li>
+<li>Timestamp</li>
+</ul>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Security First!</p>
+<p>Your API always verifies webhooks by:</p>
+<ul>
+<li>Checking the Stripe signature</li>
+<li>Validating the cabinet ID</li>
+<li>Confirming the payment amount</li>
+<li>Ensuring no duplicate processing</li>
+</ul>
+</div>
+<h3 id="4-credit-management">4. Credit Management 🎮</h3>
+<p>Once payment is verified:</p>
+<pre class="mermaid"><code>graph TD
+    A[AWS Lambda] --&gt;|Publishes| B[MQTT Message]
+    B --&gt;|Delivers to| C[Cabinet Software]
+    C --&gt;|Adds| D[Game Credits]
+    D --&gt;|Starts| E[Game]
+    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style B fill:#f0f0f0,stroke:#333,stroke-width:2px
+    style C fill:#e1e1e1,stroke:#333,stroke-width:2px
+    style D fill:#d3d3d3,stroke:#333,stroke-width:2px
+    style E fill:#c5c5c5,stroke:#333,stroke-width:2px</code></pre>
+<ol>
+<li>Your API creates a "coin pulse" message</li>
+<li>EMQX delivers it to your cabinet</li>
+<li>The cabinet software:<ul>
+<li>Adds the credits</li>
+<li>Starts the game</li>
+<li>Updates the display</li>
+</ul>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Credit Calculation</p>
+<p>Credits are calculated based on:</p>
+<ul>
+<li>Payment amount</li>
+<li>Your price settings</li>
+<li>Any active promotions</li>
+<li>Multi-play discounts</li>
+</ul>
+</div>
+<h2 id="message-formats">Message Formats 📝</h2>
+<h3 id="coin-pulse-message">Coin Pulse Message</h3>
+<p>When credits are added:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&quot;machineId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-machine-id&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&quot;credits&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&quot;timestamp&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2024-07-01T12:00:00Z&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="payment-confirmation">Payment Confirmation</h3>
+<p>What Stripe sends to your API:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;checkout.session.completed&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">        </span><span class="nt">&quot;object&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">            </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">                </span><span class="nt">&quot;machine_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;your-machine-id&quot;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">            </span><span class="p">},</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">            </span><span class="nt">&quot;amount_total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="error-handling">Error Handling 🔧</h2>
+<p>The system handles various payment issues:</p>
+<h3 id="payment-failures">Payment Failures</h3>
+<p>If payment fails:</p>
+<ul>
+<li>Player sees clear error message</li>
+<li>No credits are added</li>
+<li>Cabinet stays in attract mode</li>
+<li>Player can try again</li>
+</ul>
+<h3 id="network-issues">Network Issues</h3>
+<p>If connection drops:</p>
+<ul>
+<li>Payments are never lost</li>
+<li>System retries message delivery</li>
+<li>Cabinet maintains state</li>
+<li>Records are reconciled automatically</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Preventing Double Credits</p>
+<p>The system prevents duplicate credits by:</p>
+<ul>
+<li>Tracking transaction IDs</li>
+<li>Verifying webhook signatures</li>
+<li>Maintaining state records</li>
+<li>Using idempotency keys</li>
+</ul>
+</div>
+<h2 id="testing-payments">Testing Payments 🧪</h2>
+<p>You can test the system using:</p>
+<ol>
+<li>
+<p>Stripe test cards:</p>
+<ul>
+<li>Success: 4242 4242 4242 4242</li>
+<li>Decline: 4000 0000 0000 0002</li>
+<li>Error: 4000 0000 0000 9995</li>
+</ul>
+</li>
+<li>
+<p>Test webhook events:</p>
+<ul>
+<li>Use Stripe CLI</li>
+<li>Send test webhooks</li>
+<li>Monitor responses</li>
+<li>Check credit addition</li>
+</ul>
+</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Testing Best Practices</p>
+<p>Always test:</p>
+<ul>
+<li>Different payment amounts</li>
+<li>Failed payments</li>
+<li>Network disconnections</li>
+<li>Multiple rapid payments</li>
+</ul>
+</div>
+<h2 id="monitoring-debugging">Monitoring &amp; Debugging 📊</h2>
+<p>Keep track of your payments:</p>
+<ol>
+<li>
+<p>Stripe Dashboard:</p>
+<ul>
+<li>View all transactions</li>
+<li>Check payment status</li>
+<li>Handle refunds</li>
+<li>Monitor disputes</li>
+</ul>
+</li>
+<li>
+<p>AWS CloudWatch:</p>
+<ul>
+<li>Watch API logs</li>
+<li>Monitor webhooks</li>
+<li>Track errors</li>
+<li>Set up alerts</li>
+</ul>
+</li>
+<li>
+<p>EMQX Console:</p>
+<ul>
+<li>View message flow</li>
+<li>Check connections</li>
+<li>Monitor delivery</li>
+<li>Debug issues</li>
+</ul>
+</li>
+</ol>
+<h2 id="next-steps">Next Steps 🚀</h2>
+<p>Now that you understand payments:</p>
+<ol>
+<li>Learn about <a href="../game-control/">Game Control</a></li>
+<li>Explore <a href="../cloud-services/">Cloud Services</a></li>
+<li>Try setting up test payments</li>
+</ol>
+<p><a class="md-button md-button--primary" href="../game-control/">Continue to Game Control →</a>
+<a class="md-button" href="../architecture/">Back to Architecture</a></p>
+<div class="admonition question">
+<p class="admonition-title">Need Help?</p>
+<ul>
+<li>Check our <a href="../../troubleshooting/common-issues/">Troubleshooting Guide</a></li>
+<li>Ask your teacher or mentor</li>
+<li>Review the code examples</li>
+<li>Try our payment tutorials</li>
+</ul>
+</div>
 
 
 
