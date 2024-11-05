@@ -204,4 +204,4 @@ Now that your webhook is set up:
 4. Monitor for successful operation
 
 [Continue to Testing →](../../quick-deploy/testing.md){ .md-button .md-button--primary }
-[Back to Stripe Setup](../stripe-setup.md){ .md-button }
+[Back to Stripe Setup](stripe-setup.md){ .md-button }
