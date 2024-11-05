@@ -269,4 +269,3 @@ Now that you understand the cloud services:
     * Check our [Troubleshooting Guide](../troubleshooting/common-issues.md)
     * Ask your teacher or mentor
     * Review service documentation
-    * Try our cloud tutorials

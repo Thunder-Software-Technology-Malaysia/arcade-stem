@@ -52,7 +52,6 @@ Choose where you'd like to start:
 
 * Check out our [Troubleshooting Guide](troubleshooting/common-issues.md)
 * Visit the [Getting Help](troubleshooting/getting-help.md) section
-* Look through our [Tutorials](tutorials/basic-setup.md)
 
 ---
 

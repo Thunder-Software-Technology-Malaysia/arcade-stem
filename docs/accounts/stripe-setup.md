@@ -208,7 +208,7 @@ The Stripe CLI helps test locally:
 3. Test payments locally
 
 !!! tip "Testing Locally"
-    We'll cover detailed testing in the tutorials section!
+    We'll cover detailed testing in the deployment guides!
 
 ## Security Best Practices :lock:
 

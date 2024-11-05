@@ -250,4 +250,3 @@ Now that you understand payments:
     * Check our [Troubleshooting Guide](../troubleshooting/common-issues.md)
     * Ask your teacher or mentor
     * Review the code examples
-    * Try our payment tutorials

@@ -21,8 +21,6 @@ Before starting, make sure you have:
 * AWS CLI installed on your computer
 * Your IAM user access keys handy
 
-!!! tip "Need AWS CLI?"
-    Visit our [AWS CLI Setup Guide](../../tutorials/aws-cli-setup.md) if you haven't installed it yet!
 
 ## Creating Your Registry :wrench:
 

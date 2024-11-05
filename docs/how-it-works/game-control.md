@@ -245,4 +245,3 @@ Now that you understand game control:
     * Check our [Troubleshooting Guide](../troubleshooting/common-issues.md)
     * Ask your teacher or mentor
     * Review the code examples
-    * Try our game control tutorials
