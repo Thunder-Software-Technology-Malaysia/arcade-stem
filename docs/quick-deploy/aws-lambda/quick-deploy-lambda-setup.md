@@ -7,7 +7,7 @@ Welcome to the AWS Lambda setup guide! Now that you have the Docker image on you
 Before starting, make sure you have:
 
 * Completed [Basic AWS Setup](../accounts/aws/basic-setup.md)
-* Successfully pulled the Docker image (previous step)
+* Successfully pulled and renamed the Docker image (previous step)
 * AWS CLI installed and configured
 * Your terminal or PowerShell still open
 
@@ -18,31 +18,40 @@ First, we need to get your Docker image into AWS's container registry (ECR):
 1. Create an ECR repository:
 
     ```bash
-    aws ecr create-repository --repository-name artcade-api
+    aws ecr create-repository --repository-name artcade-api-repo
     ```
 
-2. Login to ECR:
+2. Login to ECR (replace YOUR-REGION and YOUR-ACCOUNT-ID):
 
     ```bash
-    aws ecr get-login-password --region your-region | docker login --username AWS --password-stdin your-account-id.dkr.ecr.your-region.amazonaws.com
+    aws ecr get-login-password --region YOUR-REGION | docker login --username AWS --password-stdin YOUR-ACCOUNT-ID.dkr.ecr.YOUR-REGION.amazonaws.com
     ```
 
-3. Tag your image for ECR:
+3. Tag your image for ECR (make sure to replace YOUR-REGION and YOUR-ACCOUNT-ID):
 
     ```bash
-    docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.amazonaws.com/artcade-api:latest
-```
-
-4. Push to ECR:
-
-    ```bash
-    docker push your-account-id.dkr.ecr.your-region.amazonaws.com/artcade-api:latest
+    docker tag diy-artcade-payment-api:latest YOUR-ACCOUNT-ID.dkr.ecr.YOUR-REGION.amazonaws.com/artcade-api-repo:latest
     ```
 
-!!! tip "Finding Your Account ID"
-    You can find your AWS account ID in the top right of your AWS Console, or by running:
+4. Push to ECR (using the same YOUR-REGION and YOUR-ACCOUNT-ID):
+
+    ```bash
+    docker push YOUR-ACCOUNT-ID.dkr.ecr.YOUR-REGION.amazonaws.com/artcade-api-repo:latest
+    ```
+
+!!! info "About YOUR-REGION and YOUR-ACCOUNT-ID"
+    * Replace YOUR-REGION with values like `us-east-1` or `us-west-2`
+    * Replace YOUR-ACCOUNT-ID with your 12-digit AWS account number
+    * Find both values in the top right of your AWS Console
+    * Or run this command to find your account ID:
     ```bash
     aws sts get-caller-identity
+    ```
+
+!!! example "Command Example with Real Values"
+    If your account ID is 123456789012 and region is us-east-1, your commands would look like:
+    ```bash
+    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 123456789012.dkr.ecr.us-east-1.amazonaws.com
     ```
 
 ## Step 2: Create Lambda Function :gear:
@@ -57,7 +66,7 @@ Now that your image is in ECR, let's create your Lambda function:
     * Select "Container image"
     * Set function name to "artcade-api"
     * Click "Browse images"
-    * Select your "artcade-api" repository
+    * Select the "artcade-api-repo" repository
     * Choose the "latest" tag
     * Click "Create function"
 
@@ -78,7 +87,7 @@ Your Lambda function needs some secret information to work:
     * Select "Environment variables"
     * Click "Edit"
 
-2. Add these variables:
+2. Add these variables (you got these from previous setup steps):
 
     * `STRIPE_API_KEY`: Your Stripe secret key
     * `STRIPE_WEBHOOK_SECRET`: Your Stripe webhook secret
@@ -135,24 +144,32 @@ Your Lambda function is ready! Next, we'll:
 ### Common Issues
 
 **Push to ECR Failed**
-
+```bash
+Error: Cannot push to ECR
+```
 * Check AWS CLI configuration
-* Verify repository name
+* Verify the repository name is exactly `artcade-api-repo`
 * Try logging in to ECR again
+* Make sure you replaced YOUR-REGION and YOUR-ACCOUNT-ID
 
 **Lambda Creation Failed**
-
-* Verify image URI is correct
+```bash
+Error: Cannot create function
+```
+* Verify your image URI is correct
 * Check IAM permissions
-* Make sure image successfully pushed to ECR
+* Confirm the image was pushed to ECR successfully
+* Make sure you're using the correct repository name
 
 **Function Test Failed**
-
-* Check environment variables
-* Look at CloudWatch logs
-* Verify all secrets are correct
+```bash
+Error: Function error
+```
+* Check all environment variables are set correctly
+* Look at CloudWatch logs for specific error messages
+* Verify all secrets and credentials are correct
 
 !!! question "Need Help?"
     * Check our [Troubleshooting Guide](../../troubleshooting/common-issues.md)
     * Ask your teacher or mentor
-    * Review CloudWatch logs
+    * Review CloudWatch logs in the "Monitor" tab

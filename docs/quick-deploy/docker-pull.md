@@ -25,18 +25,27 @@ Before we pull the image, let's understand what we're doing:
     * It works the same way on every computer
     * You can share it easily with others
 
-## Pulling the Image :arrow_down:
+## Getting and Renaming the Image :arrow_down:
 
-1. Open your terminal or PowerShell and run:
+1. First, pull the image:
 
 ```bash
 docker pull yeeyon/arcade-stem:latest
 ```
 
-!!! note "Image Not Found?"
-    If you see an error about the image not being found, check with your teacher or mentor for the correct image URL.
+2. Give it a more descriptive name:
 
-2. Verify the pull was successful:
+```bash
+docker tag yeeyon/arcade-stem:latest diy-artcade-payment-api:latest
+```
+
+3. Remove the old name (optional):
+
+```bash
+docker rmi yeeyon/arcade-stem:latest
+```
+
+4. Verify everything worked:
 
 ```bash
 docker images
@@ -45,24 +54,33 @@ docker images
 You should see something like:
 
 ```
-REPOSITORY                TAG       IMAGE ID       CREATED        SIZE
-yeeyon/arcade-stem        latest    abc123def456   1 minute ago   156MB
+REPOSITORY                 TAG       IMAGE ID       CREATED        SIZE
+diy-artcade-payment-api   latest    abc123def456   1 minute ago   156MB
 ```
+
+!!! info "About Image Names"
+    * Renaming an image with `docker tag` doesn't create a copy
+    * It just gives the same image a new name
+    * This helps us keep our project organized
+    * Both names would work the same way in commands
 
 ## Testing the Image :test_tube:
 
 Let's make sure the image works:
 
-1. Run a test container:
+=== "Apple Silicon Mac (M1/M2/M3)"
+    ```bash
+    docker run --platform linux/amd64 --rm diy-artcade-payment-api:latest echo "Hello from arcade container"
+    ```
 
-```bash
-docker run --platform linux/amd64 --rm yeeyon/arcade-stem:latest echo "Hello from arcade container"
+=== "Windows/Linux/Intel Mac"
+    ```bash
+    docker run --rm diy-artcade-payment-api:latest echo "Hello from arcade container"
+    ```
+
+You should see:
 ```
-
-2. You should see:
-
-```
-Hello from arcade container!
+Hello from arcade container
 ```
 
 !!! success "What Did We Do?"
@@ -77,7 +95,7 @@ Hello from arcade container!
 View detailed information about your image:
 
 ```bash
-docker inspect yeeyon/arcade-stem:latest
+docker inspect diy-artcade-payment-api:latest
 ```
 
 This shows you:
@@ -99,7 +117,6 @@ The next guide will walk you through these steps!
 
 [Continue to Lambda Setup →](aws-lambda/quick-deploy-lambda-setup.md){ .md-button .md-button--primary }
 [Back to Quick Deploy Overview](overview.md){ .md-button }
-
 
 ## Troubleshooting :wrench:
 
