@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.43">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
     
     
       
@@ -1824,7 +1824,7 @@
 <ol>
 <li>Open your terminal or PowerShell and run:</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>diyartcade/arcade-payment:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>yeeyon/arcade-stem:latest
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Image Not Found?</p>
@@ -1837,14 +1837,14 @@
 </code></pre></div>
 <p>You should see something like:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>REPOSITORY                TAG       IMAGE ID       CREATED        SIZE
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>diyartcade/arcade-payment latest    abc123def456   1 minute ago   156MB
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>yeeyon/arcade-stem        latest    abc123def456   1 minute ago   156MB
 </code></pre></div>
 <h2 id="testing-the-image">Testing the Image <img alt="🧪" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f9ea.svg" title=":test_tube:" /></h2>
 <p>Let's make sure the image works:</p>
 <ol>
 <li>Run a test container:</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>diyartcade/arcade-payment:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello from arcade container!&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--platform<span class="w"> </span>linux/amd64<span class="w"> </span>--rm<span class="w"> </span>yeeyon/arcade-stem:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello from arcade container&quot;</span>
 </code></pre></div>
 <ol>
 <li>You should see:</li>
@@ -1857,12 +1857,13 @@
 <li><code>docker run</code> starts a container</li>
 <li><code>--rm</code> removes it when finished</li>
 <li><code>echo "Hello..."</code> tests that it works</li>
+<li><code>--platform linux/amd64</code> ensures compatibility with Apple Silicon Macs</li>
 <li>If you see the message, your image is working!</li>
 </ul>
 </div>
 <h2 id="checking-image-details">Checking Image Details <img alt="🔍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f50d.svg" title=":mag:" /></h2>
 <p>View detailed information about your image:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>inspect<span class="w"> </span>diyartcade/arcade-payment:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>inspect<span class="w"> </span>yeeyon/arcade-stem:latest
 </code></pre></div>
 <p>This shows you:</p>
 <ul>
