@@ -30,7 +30,7 @@ Before we pull the image, let's understand what we're doing:
 1. Open your terminal or PowerShell and run:
 
 ```bash
-docker pull diyartcade/arcade-payment:latest
+docker pull yeeyon/arcade-stem:latest
 ```
 
 !!! note "Image Not Found?"
@@ -46,7 +46,7 @@ You should see something like:
 
 ```
 REPOSITORY                TAG       IMAGE ID       CREATED        SIZE
-diyartcade/arcade-payment latest    abc123def456   1 minute ago   156MB
+yeeyon/arcade-stem        latest    abc123def456   1 minute ago   156MB
 ```
 
 ## Testing the Image :test_tube:
@@ -56,7 +56,7 @@ Let's make sure the image works:
 1. Run a test container:
 
 ```bash
-docker run --rm diyartcade/arcade-payment:latest echo "Hello from arcade container!"
+docker run --platform linux/amd64 --rm yeeyon/arcade-stem:latest echo "Hello from arcade container"
 ```
 
 2. You should see:
@@ -69,6 +69,7 @@ Hello from arcade container!
     * `docker run` starts a container
     * `--rm` removes it when finished
     * `echo "Hello..."` tests that it works
+    * `--platform linux/amd64` ensures compatibility with Apple Silicon Macs
     * If you see the message, your image is working!
 
 ## Checking Image Details :mag:
@@ -76,7 +77,7 @@ Hello from arcade container!
 View detailed information about your image:
 
 ```bash
-docker inspect diyartcade/arcade-payment:latest
+docker inspect yeeyon/arcade-stem:latest
 ```
 
 This shows you:
