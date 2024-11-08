@@ -888,9 +888,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pulling-the-image" class="md-nav__link">
+  <a href="#getting-and-renaming-the-image" class="md-nav__link">
     <span class="md-ellipsis">
-      Pulling the Image
+      Getting and Renaming the Image
     </span>
   </a>
   
@@ -1709,9 +1709,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pulling-the-image" class="md-nav__link">
+  <a href="#getting-and-renaming-the-image" class="md-nav__link">
     <span class="md-ellipsis">
-      Pulling the Image
+      Getting and Renaming the Image
     </span>
   </a>
   
@@ -1820,37 +1820,57 @@
 <li>You can share it easily with others</li>
 </ul>
 </div>
-<h2 id="pulling-the-image">Pulling the Image <img alt="⬇" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2b07.svg" title=":arrow_down:" /></h2>
+<h2 id="getting-and-renaming-the-image">Getting and Renaming the Image <img alt="⬇" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2b07.svg" title=":arrow_down:" /></h2>
 <ol>
-<li>Open your terminal or PowerShell and run:</li>
+<li>First, pull the image:</li>
 </ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>yeeyon/arcade-stem:latest
 </code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Image Not Found?</p>
-<p>If you see an error about the image not being found, check with your teacher or mentor for the correct image URL.</p>
-</div>
 <ol>
-<li>Verify the pull was successful:</li>
+<li>Give it a more descriptive name:</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>images
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>tag<span class="w"> </span>yeeyon/arcade-stem:latest<span class="w"> </span>diy-artcade-payment-api:latest
+</code></pre></div>
+<ol>
+<li>Remove the old name (optional):</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>rmi<span class="w"> </span>yeeyon/arcade-stem:latest
+</code></pre></div>
+<ol>
+<li>Verify everything worked:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>images
 </code></pre></div>
 <p>You should see something like:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>REPOSITORY                TAG       IMAGE ID       CREATED        SIZE
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>yeeyon/arcade-stem        latest    abc123def456   1 minute ago   156MB
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>REPOSITORY                 TAG       IMAGE ID       CREATED        SIZE
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>diy-artcade-payment-api   latest    abc123def456   1 minute ago   156MB
 </code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">About Image Names</p>
+<ul>
+<li>Renaming an image with <code>docker tag</code> doesn't create a copy</li>
+<li>It just gives the same image a new name</li>
+<li>This helps us keep our project organized</li>
+<li>Both names would work the same way in commands</li>
+</ul>
+</div>
 <h2 id="testing-the-image">Testing the Image <img alt="🧪" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f9ea.svg" title=":test_tube:" /></h2>
 <p>Let's make sure the image works:</p>
-<ol>
-<li>Run a test container:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--platform<span class="w"> </span>linux/amd64<span class="w"> </span>--rm<span class="w"> </span>yeeyon/arcade-stem:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello from arcade container&quot;</span>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Apple Silicon Mac (M1/M2/M3)</label><label for="__tabbed_1_2">Windows/Linux/Intel Mac</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--platform<span class="w"> </span>linux/amd64<span class="w"> </span>--rm<span class="w"> </span>diy-artcade-payment-api:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello from arcade container&quot;</span>
 </code></pre></div>
-<ol>
-<li>You should see:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Hello from arcade container!
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>diy-artcade-payment-api:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello from arcade container&quot;</span>
 </code></pre></div>
+</div>
+</div>
+</div>
+<p>You should see:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Hello from arcade container
+</code></pre></div></p>
 <div class="admonition success">
 <p class="admonition-title">What Did We Do?</p>
 <ul>
@@ -1863,7 +1883,7 @@
 </div>
 <h2 id="checking-image-details">Checking Image Details <img alt="🔍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f50d.svg" title=":mag:" /></h2>
 <p>View detailed information about your image:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>inspect<span class="w"> </span>yeeyon/arcade-stem:latest
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>inspect<span class="w"> </span>diy-artcade-payment-api:latest
 </code></pre></div>
 <p>This shows you:</p>
 <ul>
@@ -1885,14 +1905,14 @@
 <h2 id="troubleshooting">Troubleshooting <img alt="🔧" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f527.svg" title=":wrench:" /></h2>
 <h3 id="common-issues">Common Issues</h3>
 <p><strong>Docker Not Running</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Cannot<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>Docker<span class="w"> </span>daemon
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>Cannot<span class="w"> </span>connect<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>Docker<span class="w"> </span>daemon
 </code></pre></div></p>
 <ul>
 <li>Make sure Docker Desktop is running</li>
 <li>Try restarting Docker Desktop</li>
 </ul>
 <p><strong>Disk Space Issues</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>no<span class="w"> </span>space<span class="w"> </span>left<span class="w"> </span>on<span class="w"> </span>device
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>no<span class="w"> </span>space<span class="w"> </span>left<span class="w"> </span>on<span class="w"> </span>device
 </code></pre></div></p>
 <ul>
 <li>Clear old Docker images: <code>docker system prune</code></li>

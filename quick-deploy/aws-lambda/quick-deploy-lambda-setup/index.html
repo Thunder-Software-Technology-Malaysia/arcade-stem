@@ -1801,7 +1801,7 @@
 <p>Before starting, make sure you have:</p>
 <ul>
 <li>Completed <a href="../accounts/aws/basic-setup.md">Basic AWS Setup</a></li>
-<li>Successfully pulled the Docker image (previous step)</li>
+<li>Successfully pulled and renamed the Docker image (previous step)</li>
 <li>AWS CLI installed and configured</li>
 <li>Your terminal or PowerShell still open</li>
 </ul>
@@ -1810,29 +1810,40 @@
 <ol>
 <li>
 <p>Create an ECR repository:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aws<span class="w"> </span>ecr<span class="w"> </span>create-repository<span class="w"> </span>--repository-name<span class="w"> </span>artcade-api
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>aws<span class="w"> </span>ecr<span class="w"> </span>create-repository<span class="w"> </span>--repository-name<span class="w"> </span>artcade-api-repo
 </code></pre></div>
 </li>
 <li>
-<p>Login to ECR:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>your-region<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span>your-account-id.dkr.ecr.your-region.amazonaws.com
+<p>Login to ECR (replace YOUR-REGION and YOUR-ACCOUNT-ID):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>YOUR-REGION<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span>YOUR-ACCOUNT-ID.dkr.ecr.YOUR-REGION.amazonaws.com
 </code></pre></div>
 </li>
 <li>
-<p>Tag your image for ECR:</p>
-<p><code>bash
-docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.amazonaws.com/artcade-api:latest</code></p>
+<p>Tag your image for ECR (make sure to replace YOUR-REGION and YOUR-ACCOUNT-ID):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>tag<span class="w"> </span>diy-artcade-payment-api:latest<span class="w"> </span>YOUR-ACCOUNT-ID.dkr.ecr.YOUR-REGION.amazonaws.com/artcade-api-repo:latest
+</code></pre></div>
 </li>
 <li>
-<p>Push to ECR:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>push<span class="w"> </span>your-account-id.dkr.ecr.your-region.amazonaws.com/artcade-api:latest
+<p>Push to ECR (using the same YOUR-REGION and YOUR-ACCOUNT-ID):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>push<span class="w"> </span>YOUR-ACCOUNT-ID.dkr.ecr.YOUR-REGION.amazonaws.com/artcade-api-repo:latest
 </code></pre></div>
 </li>
 </ol>
-<div class="admonition tip">
-<p class="admonition-title">Finding Your Account ID</p>
-<p>You can find your AWS account ID in the top right of your AWS Console, or by running:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
+<div class="admonition info">
+<p class="admonition-title">About YOUR-REGION and YOUR-ACCOUNT-ID</p>
+<ul>
+<li>Replace YOUR-REGION with values like <code>us-east-1</code> or <code>us-west-2</code></li>
+<li>Replace YOUR-ACCOUNT-ID with your 12-digit AWS account number</li>
+<li>Find both values in the top right of your AWS Console</li>
+<li>Or run this command to find your account ID:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>aws<span class="w"> </span>sts<span class="w"> </span>get-caller-identity
+</code></pre></div></li>
+</ul>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Command Example with Real Values</p>
+<p>If your account ID is 123456789012 and region is us-east-1, your commands would look like:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>us-east-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="m">123456789012</span>.dkr.ecr.us-east-1.amazonaws.com
 </code></pre></div></p>
 </div>
 <h2 id="step-2-create-lambda-function">Step 2: Create Lambda Function <img alt="⚙" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/2699.svg" title=":gear:" /></h2>
@@ -1847,7 +1858,7 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 <li>Select "Container image"</li>
 <li>Set function name to "artcade-api"</li>
 <li>Click "Browse images"</li>
-<li>Select your "artcade-api" repository</li>
+<li>Select the "artcade-api-repo" repository</li>
 <li>Choose the "latest" tag</li>
 <li>Click "Create function"</li>
 </ul>
@@ -1875,7 +1886,7 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 </ul>
 </li>
 <li>
-<p>Add these variables:</p>
+<p>Add these variables (you got these from previous setup steps):</p>
 <ul>
 <li><code>STRIPE_API_KEY</code>: Your Stripe secret key</li>
 <li><code>STRIPE_WEBHOOK_SECRET</code>: Your Stripe webhook secret</li>
@@ -1931,30 +1942,32 @@ docker tag diyartcade/arcade-payment:latest your-account-id.dkr.ecr.your-region.
 <a class="md-button" href="docker-pull.md">Back to Docker Pull</a></p>
 <h2 id="troubleshooting">Troubleshooting <img alt="🔧" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f527.svg" title=":wrench:" /></h2>
 <h3 id="common-issues">Common Issues</h3>
-<p><strong>Push to ECR Failed</strong></p>
-<ul>
-<li>Check AWS CLI configuration</li>
-<li>Verify repository name</li>
-<li>Try logging in to ECR again</li>
-</ul>
-<p><strong>Lambda Creation Failed</strong></p>
-<ul>
-<li>Verify image URI is correct</li>
-<li>Check IAM permissions</li>
-<li>Make sure image successfully pushed to ECR</li>
-</ul>
-<p><strong>Function Test Failed</strong></p>
-<ul>
-<li>Check environment variables</li>
-<li>Look at CloudWatch logs</li>
-<li>Verify all secrets are correct</li>
-</ul>
+<p><strong>Push to ECR Failed</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Error:<span class="w"> </span>Cannot<span class="w"> </span>push<span class="w"> </span>to<span class="w"> </span>ECR
+</code></pre></div>
+* Check AWS CLI configuration
+* Verify the repository name is exactly <code>artcade-api-repo</code>
+* Try logging in to ECR again
+* Make sure you replaced YOUR-REGION and YOUR-ACCOUNT-ID</p>
+<p><strong>Lambda Creation Failed</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Error:<span class="w"> </span>Cannot<span class="w"> </span>create<span class="w"> </span><span class="k">function</span>
+</code></pre></div>
+* Verify your image URI is correct
+* Check IAM permissions
+* Confirm the image was pushed to ECR successfully
+* Make sure you're using the correct repository name</p>
+<p><strong>Function Test Failed</strong>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Error:<span class="w"> </span>Function<span class="w"> </span>error
+</code></pre></div>
+* Check all environment variables are set correctly
+* Look at CloudWatch logs for specific error messages
+* Verify all secrets and credentials are correct</p>
 <div class="admonition question">
 <p class="admonition-title">Need Help?</p>
 <ul>
 <li>Check our <a href="../../../troubleshooting/common-issues/">Troubleshooting Guide</a></li>
 <li>Ask your teacher or mentor</li>
-<li>Review CloudWatch logs</li>
+<li>Review CloudWatch logs in the "Monitor" tab</li>
 </ul>
 </div>
 
